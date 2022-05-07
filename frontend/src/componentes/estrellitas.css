@@ -1,0 +1,40 @@
+[data-star] {
+  text-align: left;
+  font-style: normal;
+  display: inline-block;
+  position: relative;
+  unicode-bidi: bidi-override;
+  font-size: 25px;
+}
+[data-star]::before {
+  display: block;
+  content: "★★★★★";
+  color: white;
+}
+[data-star]::after {
+  white-space: nowrap;
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "★★★★★";
+  width: 0;
+  color: orange;
+  overflow: hidden;
+  height: 100%;
+}
+
+[data-star^="1"]::after {
+  width: 20%;
+}
+[data-star^="2"]::after {
+  width: 40%;
+}
+[data-star^="3"]::after {
+  width: 60%;
+}
+[data-star^="4"]::after {
+  width: 80%;
+}
+[data-star^="5"]::after {
+  width: 100%;
+}

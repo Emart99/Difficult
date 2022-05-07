@@ -1,0 +1,463 @@
+@import url("https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+
+:root {
+  --background-image: url("https://i.imgur.com/79G1twO.png");
+  --color-titulo: #c52222;
+  --colorHeader: #ad8b73;
+  --colorFooter: rgb(63, 63, 63);
+  --color-white: white;
+  --color-searchBar: rgb(227, 202, 165);
+  --color-background: rgb(255, 251, 233);
+  --letra: black;
+  --shadowSearchBar: #ceab93;
+  --filtrador: 0;
+  --login-bg: rgba(173, 139, 115, 0.35);
+}
+
+[data-theme="dark"] {
+  --background-image: url("https://i.imgur.com/zYfiXhG.png");
+  --color-searchBar: rgb(34, 34, 34);
+  --colorHeader: #3c415c;
+  --color-background: #333;
+  --color-titulo: darkred;
+  --letra: white;
+  --shadowSearchBar: #565d83;
+  --filtrador: invert(1) grayscale(100%) brightness(200%);
+  --login-bg: rgba(51, 51, 51, 0.35);
+}
+
+.dark {
+  background: #333;
+}
+
+thead {
+  font-size: 1.3rem;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.loguito-header {
+  margin-right: 12px;
+  width: 50px;
+  height: 50px;
+}
+
+.title-header {
+  margin-bottom: 0px;
+}
+
+.loguito-footer {
+  margin-left: 5px;
+  width: 27px;
+  height: 27px;
+}
+
+.logo-fondo {
+  background-image: var(--background-image);
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 5rem auto;
+  width: 50%;
+  max-width: 725px;
+  min-width: 360px;
+}
+
+.register-card {
+  color: var(--letra);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
+  align-items: center;
+  font-size: 1.2rem;
+  margin-bottom: 5rem;
+  margin-top: 2rem;
+}
+
+
+
+.cartel {
+  font-style: italic;
+  font-size: 5rem;
+  text-shadow: 3px 3px #ada599;
+  place-self: center;
+  color: white;
+}
+
+.card-img-top {
+  object-fit: cover;
+  height: 240px;
+}
+
+.img-detalle-producto {
+  object-fit: cover;
+  height: 465px;
+}
+
+.filter {
+  color: var(--letra);
+  background-color: var(--color-searchBar);
+  padding: 6%;
+  border-radius: 3px;
+  border: 2px solid white;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
+}
+
+.filter-mobile {
+  display: none;
+}
+
+.carrito-container {
+  margin-top: 3%;
+  margin-bottom: 5%;
+  min-width: 360px;
+}
+
+.carrito-card-body {
+  height: 45vh;
+  overflow: auto;
+}
+
+.searchBar {
+  padding: 10px;
+  background-color: var(--color-searchBar);
+  margin-bottom: 3%;
+  box-shadow: 0px 4px 8px var(--shadowSearchBar);
+}
+
+.input-searchbar {
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+}
+
+.iconSearchBar {
+  color: white;
+  background-color: var(--colorHeader);
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+}
+
+.filter-button {
+  width: 100%;
+  border-radius: 0;
+  border: 0;
+  border-color: grey;
+}
+
+.card {
+  box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
+}
+
+#mycard .card {
+  background-color: var(--color-searchBar);
+  border: 2px solid white;
+  color: var(--letra);
+}
+
+div.input-box,
+textarea {
+  color: black;
+  background: white;
+}
+
+.main {
+  min-height: 80vh;
+}
+
+#myLogincard .card {
+  background-color: var(--login-bg);
+  border: 2px solid white;
+  color: var(--letra);
+}
+
+.login-card {
+  color: white;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
+  align-items: center;
+  font-size: 1.7rem;
+}
+
+.white-body {
+  color: white !important;
+  width: 67%;
+}
+
+.foto-redondita {
+  border-radius: 3%;
+  border: 2px solid white;
+}
+
+.card-body {
+  background-color: var(--color-8);
+  color: var(--letra);
+}
+
+.foto {
+  height: 100%;
+}
+
+.navbar {
+  padding: 0.5rem 2rem;
+  background-color: var(--colorHeader);
+  color: var(--color-white);
+  box-shadow: 0px 4px 8px var(--shadowSearchBar);
+  min-width: 360px;
+}
+
+.navbar-collapse {
+  justify-content: flex-end;
+}
+
+#myNavBar .nav-link {
+  color: white;
+}
+
+.perfil {
+  margin-bottom: 6rem;
+  min-width: 347px;
+}
+
+.content {
+  margin-bottom: 5%;
+  min-width: 360px;
+}
+
+.forgotten {
+  font-size: 15px;
+  color: #216fdb;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+}
+
+.forgotten:hover {
+  text-decoration: underline;
+}
+
+.separador {
+  align-items: center;
+  border-bottom: 1px solid white;
+  margin: 20px 16px;
+  text-align: center;
+}
+
+.scrollbar {
+  position: relative;
+  height: 340px;
+  overflow: auto;
+}
+
+.table-scroll-y {
+  display: block;
+}
+
+.modal-content {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.modal-header {
+  border-bottom: 0;
+}
+
+.letra-dinamica{
+  color: var(--letra);
+}
+
+.table {
+  color: var(--letra);
+  text-align: center;
+}
+
+.hover-effect {
+  transition: all 0.2s ease;
+}
+
+.hover-effect:hover {
+  transform: scale(1.02);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+#checkboxColor .form-check-input:checked {
+  background-color: var(--colorHeader);
+  border-color: var(--colorHeader);
+}
+
+#myButton .btn-primary {
+  background-color: var(--colorHeader);
+  border-color: var(--colorHeader);
+}
+
+.toast-producto {
+  min-width: 375px!important;
+}
+
+
+.register-back-to-login {
+  font-size: 14px;
+  color: white;
+}
+
+.hamburguesa {
+  font-size: 1.5rem;
+  align-items: center;
+}
+
+.not-productos {
+  margin: 5% 25% 2% 25%;
+  height: 50%;
+  width: 50%;
+}
+
+.site-footer {
+  background-color: var(--colorHeader);
+  padding: 45px 0 20px;
+  font-size: 15px;
+  line-height: 24px;
+  color: var(--color-white);
+  flex-shrink: 0;
+  min-height: 20vh;
+  min-width: 360px;
+}
+
+.site-footer h6 {
+  color: #fff;
+  font-size: 16px;
+  text-transform: uppercase;
+  margin-top: 5px;
+}
+
+.site-footer .social-icons a {
+  width: 40px;
+  height: 40px;
+  background-color: var(--color-searchBar);
+}
+
+.social-icons li {
+  display: inline-block;
+}
+
+.social-icons a {
+  color: var(--colorHeader);
+  font-size: 16px;
+  display: inline-block;
+  line-height: 36px;
+  width: 44px;
+  height: 44px;
+  text-align: center;
+  margin-right: 8px;
+  border-radius: 100%;
+}
+
+.social-icons.size-sm a {
+  line-height: 34px;
+  height: 34px;
+  width: 34px;
+  font-size: 14px;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; 
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #777;
+}
+
+.swal-button{
+  background-color: #6abf9e
+
+}
+
+@media (max-width: 480px) {
+  .hamburguesa {
+    align-items: flex-end;
+  }
+}
+
+@media (max-width: 992px) {
+  .site-footer {
+    text-align: center;
+  }
+
+  .white-body {
+    width: 90%;
+  }
+
+  .not-productos {
+    margin: 8% 20% 3% 20%;
+    height: 60%;
+    width: 60%;
+  }
+
+  .hamburguesa {
+    margin-top: 20px;
+  }
+
+  .carrito-container {
+    margin-top: 3rem;
+  }
+
+  .searchBar {
+    margin-bottom: 0%;
+    box-shadow: none;
+  }
+
+  .hide-filter {
+    display: none;
+  }
+
+  .filter-mobile {
+    display: block;
+    margin-bottom: 5%;
+  }
+
+  .filter {
+    box-shadow: none;
+    border: none;
+  }
+
+  .nombre-imagen {
+    margin-bottom: 20px;
+  }
+
+  .content {
+    margin-bottom: 20%;
+  }
+
+  #myModal .modal-content {
+    background-color: var(--color-searchBar);
+    color: var(--letra);
+  }
+
+  .modal-header>button.btn-close {
+    filter: var(--filtrador);
+    color: var(--letra);
+  }
+
+  thead {
+    font-size: 1rem;
+  }
+}

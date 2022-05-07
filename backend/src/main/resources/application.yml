@@ -1,0 +1,22 @@
+server:
+  error:
+    include-message: always
+#    include-binding-errors: always
+
+spring:
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
+  datasource:
+    url: jdbc:mysql://localhost/difficultApp?createDatabaseIfNotExist=true
+    username: root
+    password: asd123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    open-in-view: false
+    show-sql: true #false
+    hibernate:
+      ddl-auto: create-drop #update
+    properties:
+      hibernate:
+        format_sql: true
