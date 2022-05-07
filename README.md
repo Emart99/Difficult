@@ -1,6 +1,6 @@
 # DifficultApp Docker 
 
-## Contiene 4 contenedores:
+## Contiene 3 contenedores:
 - #### Kotlin (Spring Boot & Gradle)
 - #### React
 - #### MySql
