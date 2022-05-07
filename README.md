@@ -5,7 +5,7 @@
 - #### React
 - #### MySql
 
-### Para ejecutarlo, desde el directorio del proyecto (donde se encuentra el docker-compose.yml) ejecutar:\
+### Para ejecutarlo, desde el directorio del proyecto (donde se encuentra el docker-compose.yml) ejecutar:
 #### `docker-compose up --build`
 
 **Nota:**
