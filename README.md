@@ -1,10 +1,9 @@
-# DifficultApp Docker (grupo-5)
+# DifficultApp Docker 
 
 ## Contiene 4 contenedores:
 - #### Kotlin (Spring Boot & Gradle)
 - #### React
 - #### MySql
-- #### Adminer (herramienta para administrar MYSQL)
 
 ### Para ejecutarlo, desde el directorio del proyecto (donde se encuentra el docker-compose.yml) ejecutar:\
 #### `docker-compose up --build`
