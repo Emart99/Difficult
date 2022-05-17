@@ -1,4 +1,6 @@
 import { Table } from "react-bootstrap";
+import { formatter } from "../utils/priceFormater";
+
 export function tablaPerfil(user) {
   const tablaHeader = [
     "Orden compra",
@@ -12,7 +14,7 @@ export function tablaPerfil(user) {
       i === "importeTotal"
         ? row.push(
             <td data-testid={i} key={i}>
-              {list[i].toFixed(2)}
+              {formatter.format(list[i])}
             </td>
           )
         : row.push(

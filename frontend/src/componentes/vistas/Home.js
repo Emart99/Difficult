@@ -38,7 +38,7 @@ export function Home() {
   const handlerProductosEncontrados = () => {
     if (productos.length > 0) {
       return (
-        <h6 className="px-3 col-lg-2 text-center col-12 letra-dinamica">Productos encontrados: {productos.length}</h6>
+        <h6 className="px-3 col-lg-2 text-center col-12 letra-dinamica text-nowrap">Productos encontrados: {productos.length}</h6>
       )
     }
   }

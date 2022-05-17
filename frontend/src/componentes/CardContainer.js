@@ -1,4 +1,6 @@
 import { Estrellitas } from "./estrellitas";
+import { formatter } from "./utils/priceFormater";
+
 export function CardContainer(productos) {
   return (
     <div className="container-fluid ">
@@ -29,7 +31,7 @@ export function CardContainer(productos) {
                 </h5>
                 <p className="card-text">{Estrellitas(producto.puntaje)}</p>
                 <p className="card-text">
-                  Precio: ${producto.precio.toFixed(2)}
+                  Precio: {formatter.format(producto.precio)}
                 </p>
                 <p className="card-text" data-testid="cardProductoPais">
                   Origen: {producto.paisDeOrigen}

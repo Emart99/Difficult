@@ -3,7 +3,6 @@ package aplicacion.dominio
 import aplicacion.dominio.producto.Lote
 import aplicacion.dominio.producto.Producto
 import com.fasterxml.jackson.annotation.JsonIgnore
-import com.fasterxml.jackson.annotation.JsonProperty
 import javax.persistence.*
 
 @MappedSuperclass

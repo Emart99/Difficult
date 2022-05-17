@@ -1,15 +1,16 @@
 import _ from "lodash";
 import { useEffect, useState } from "react";
-import { Button, Card, Container } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import {
   borrarDelCarrito, comprarCarrito, limpiarCarrito, traerCarrito
 } from "../../services/carritoService";
 import { estaLogeado } from "../../services/usuarioService";
-import { tablaCarrito } from "../tablas/tablaCarrito";
 import { ToastContainer } from 'react-toastify';
 import { MostrarError } from "../utils/toast";
 import swal from "sweetalert";
+import { notTablaCarrito } from "../tablas/notTablaCarrito";
+import { formatter } from "../utils/priceFormater";
 
 export function Carrito() {
   const [carrito, setCarrito] = useState([]);
@@ -57,9 +58,9 @@ export function Carrito() {
   function carritoVacio() {
     if (!carrito.length) {
       return (
-        <h5 className="text-center" data-testid="carritoVacio">
-          No hay elementos en el carrito
-        </h5>
+        <h4 className="text-center mt-2" style={{minHeight:'47vh'}} data-testid="carritoVacio">
+          Tu carrito está vacío
+        </h4>
       );
     }
   }
@@ -68,40 +69,41 @@ export function Carrito() {
     <>
     <ToastContainer style={{width:'370px'}} limit="3"/>
       <Container id="mycard" className="carrito-container">
-        <Card className="main">
-          <Card.Header className="m-5" as="h1">
+        
+          <h3 className="mb-4 letra-dinamica text-carrito" >
             Carrito de compras
-          </Card.Header>
+          </h3>
 
-          <Card.Body as="div" className="carrito-card-body">
-            {tablaCarrito(carrito, borrarHandler)}
+          <div className="carrito-card-body">
+            {notTablaCarrito(carrito, borrarHandler)}
             {carritoVacio()}
-          </Card.Body>
-          <Card.Footer id="myButton" as="div" className="text-end mx-2">
-            <h3 className="mb-4 mx-2" data-testid="totalTxt">
-              Total: $
+
+          <div id="myButton" as="div" className="text-end mx-2">
+            <h4 className="mb-4 mx-2 letra-dinamica text-carrito" data-testid="totalTxt">
+              Total: {" "}
               <span data-testid="totalCarrito">
-                {_.sum(_.map(carrito, (i) => i.precio)).toFixed(2)}
+                {formatter.format(_.sum(_.map(carrito, (i) => i.precio)))}
               </span>
-            </h3>
-            <Button
-              size="lg"
-              variant="outline-light"
-              className="mx-3"
-              onClick={() => limpiarCarritoHandler()}
-              data-testid="limpiarCarrito"
-            >
-              Limpiar
-            </Button>
-            <Button
-              size="lg"
-              onClick={(e) => {compradorHandler(e);return false}}
-              data-testid="comprarCarrito"
-            >
-              Comprar
-            </Button>
-          </Card.Footer>
-        </Card>
+            </h4>
+            <div className="carrito-button-container">
+              <Button
+                size="lg"
+                variant="outline-secondary"
+                onClick={() => limpiarCarritoHandler()}
+                data-testid="limpiarCarrito"
+              >
+                Limpiar
+              </Button>
+              <Button
+                size="lg"
+                onClick={(e) => {compradorHandler(e);return false}}
+                data-testid="comprarCarrito"
+              >
+                Comprar
+              </Button>
+            </div>
+            </div>
+          </div>
       </Container>
     </>
   );

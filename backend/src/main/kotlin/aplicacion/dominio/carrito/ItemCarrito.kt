@@ -10,7 +10,7 @@ class ItemCarrito {
     var productoId: Long = 0
     var loteId: Long = 0
     var cantidad: Int = 0
-
+    var imagen: String = ""
     var precio: Double = 0.0
     var nombre: String = ""
     var descripcion: String = ""
@@ -28,7 +28,7 @@ class ItemCarrito {
 
     fun updateItem(lista: List<Producto>) {
         val producto: Producto = lista.first { it.id == productoId }
-
+        imagen = producto.imagen
         precio = cantidad * producto.precio()
         nombre = producto.nombre
         descripcion = producto.descripcion

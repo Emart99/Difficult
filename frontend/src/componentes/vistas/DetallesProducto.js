@@ -10,6 +10,7 @@ import { tablaDetalleProducto } from "./../tablas/tablaDetalleProducto";
 import { Detalles } from "../Detalles";
 import { MostrarAgregado } from "../utils/toast";
 import { ToastContainer } from "react-toastify";
+import { formatter } from "../utils/priceFormater";
 
 export function DetallesProducto() {
   const { id } = useParams();
@@ -85,7 +86,7 @@ const handleCarrito = async () => {
                   >
                     <ToastContainer position="bottom-center" className="toast-producto "/>
                     <div className="mb-2">
-                      <h3>${producto && producto.precio.toFixed(2)}</h3>
+                      <h3>{producto && formatter.format(producto.precio*cantidad)}</h3>
                     </div>
                     <Form.Label key="Cantidad" as="div">
                       Cantidad

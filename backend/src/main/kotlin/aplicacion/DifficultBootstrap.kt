@@ -375,6 +375,40 @@ open class DifficultBootstrap : InitializingBean {
                 agregarLote(listaDeLotes[cantidadDeLotes + it])
             }
         })
+        repoProductos.save(Combo().apply {
+            imagen = "B7yWM0f"
+            nombre = "combo"
+            descripcion = "pisos y pinturas"
+            puntaje = 1
+            paisDeOrigen = "Argentina"
+
+            (0..3).forEach {
+                val productoSimple = productoTemp[it]
+                agregarProductoCombo(productoSimple, productoSimple.lotes.first(), it + 1)
+                agregarLote(Lote().apply{
+                    fechaIngreso= LocalDate.now()
+                    cantidadDeUnidades=2
+                })
+            }
+        })
+//        for(i in 1..10000){
+//            repoProductos.save(Combo().apply {
+//                imagen = "B7yWM0f"
+//                nombre = "combo "+i.toString()
+//                descripcion = "pisos y pinturas"
+//                puntaje = 1
+//                paisDeOrigen = "Argentina"
+//
+//                (0..3).forEach {
+//                    val productoSimple = productoTemp[it]
+//                    agregarProductoCombo(productoSimple, productoSimple.lotes.first(), it + 1)
+//                    agregarLote(Lote().apply{
+//                        fechaIngreso=LocalDate.now()
+//                        cantidadDeUnidades=2
+//                    })
+//                }
+//            })
+//        }
 
 
 

@@ -17,7 +17,7 @@ interface RepoProductos : CrudRepository<Producto, Long> {
 
 
     @Query("""
-        SELECT DISTINCT producto from Producto producto 
+        SELECT producto from Producto producto 
             join fetch
                producto.lotes
             where
@@ -30,6 +30,7 @@ interface RepoProductos : CrudRepository<Producto, Long> {
             SELECT producto from Producto producto 
             join fetch
                producto.lotes
+            
             where
                 producto.id = :pid
     """)
@@ -40,6 +41,8 @@ interface RepoProductos : CrudRepository<Producto, Long> {
         SELECT DISTINCT producto from Producto producto 
             join fetch
                producto.lotes
+            left outer join fetch
+               producto.items
         WHERE
             (:#{#datos.nombre}       = NULL OR producto.nombre LIKE %:#{#datos.nombre}%) AND
             (:#{#datos.puntaje}      = NULL OR producto.puntaje >= :#{#datos.puntaje}) AND

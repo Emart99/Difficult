@@ -14,7 +14,7 @@ import javax.persistence.*
 class Combo : Producto() {
     @JsonView(View.ProductoIndividual::class)
     @OneToMany(cascade = [CascadeType.MERGE,CascadeType.PERSIST], fetch = FetchType.EAGER) @JoinColumn(name = "combo_id")
-    @JsonIgnore var items: MutableList<ItemCombo> = mutableListOf()
+    @JsonIgnore var items: MutableSet<ItemCombo> = mutableSetOf()
 
     fun agregarProductoCombo(item: ProductoSimple, lote: Lote, cantidad: Int) {
         items.add(ItemCombo(item, lote, cantidad))

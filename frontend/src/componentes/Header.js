@@ -57,10 +57,10 @@ export function Header(setTheme, theme) {
               </label>
               <span>🌒</span>
             </div>
-            <Nav.Link href="/home" className="me-3">
+            <Nav.Link href="/home">
               Home
             </Nav.Link>
-            <Nav.Link href="/carrito" className="me-3">
+            <Nav.Link href="/carrito">
               <AiOutlineShoppingCart />
               Carrito
             </Nav.Link>

@@ -83,7 +83,6 @@ thead {
 }
 
 
-
 .cartel {
   font-style: italic;
   font-size: 5rem;
@@ -116,14 +115,14 @@ thead {
 }
 
 .carrito-container {
+  min-height: 69vh;
   margin-top: 3%;
   margin-bottom: 5%;
   min-width: 360px;
 }
 
 .carrito-card-body {
-  height: 45vh;
-  overflow: auto;
+  min-height: 30.7vh;
 }
 
 .searchBar {
@@ -152,8 +151,35 @@ thead {
   border-color: grey;
 }
 
+.carrito{
+  width: max(300px,100%);
+  box-shadow: 0 5px 6px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
+  background-color: var(--color-searchBar);
+   border: 2px solid white; 
+  color: var(--letra);
+  border-radius: 5px;
+  font-size: 1.1rem;
+  margin-bottom: 1%;
+}
+
+
+
+.img-carrito{
+  max-width: 275px;
+  width: 16vw;
+  height: 16vh;
+  min-width: 120px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  object-fit: cover;
+}
+
 .card {
   box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
+}
+
+td, tr{
+  vertical-align: middle;
 }
 
 #mycard .card {
@@ -390,14 +416,54 @@ input[type="number"] {
   background-color: #6abf9e
 
 }
+.carrito-button-container{
+  display:flex;
+  justify-content: flex-end;
+  gap:10px;
+}
 
 @media (max-width: 480px) {
   .hamburguesa {
     align-items: flex-end;
   }
+
+
+  .carrito{
+    font-size: 1rem;
+  }
+
+}
+@media (max-width: 575px){
+  .carrito-button-container{
+    flex-direction: column-reverse;
+  }
+  .text-carrito{
+    text-align: center;
+  }
+  .img-carrito{
+    max-width: none;
+    width:100%; 
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 0;
+  }
+
 }
 
-@media (max-width: 992px) {
+
+ @media (max-width: 992px) { */
+
+  .img-center{
+    width:75%; 
+    max-width: 120px;
+    min-width: auto
+  }
+
+  .carrito{
+    width: max(300px, 100%);
+    margin-bottom: 2.5%;
+  }
+
   .site-footer {
     text-align: center;
   }
