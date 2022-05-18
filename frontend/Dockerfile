@@ -1,7 +1,7 @@
 FROM node:16.14.2
-WORKDIR /app
-COPY  ./package.json ./
-RUN npm install 
-
-COPY . ./
-CMD npm start
+RUN mkdir -p /front
+WORKDIR /front
+COPY package*.json /front/
+RUN npm install
+COPY . /front/
+CMD ["npm", "start"]
