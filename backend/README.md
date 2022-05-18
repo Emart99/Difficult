@@ -4,7 +4,8 @@
 ### Como ejecutarlo sin IDE
 En un bash navegar hasta el path correspondiente al proyecto y luego ejecutar los siguientes comandos\
 **./gradlew build** \
-**./gradlew run**
+**./gradlew run**\
+**Nota: posiblemente tenga que cambiar la contraseña de mysql del archivo application.yml que se encuentra en:** `src/main/resources/`
 
 ## EndPoints disponibles
 
