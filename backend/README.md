@@ -5,7 +5,7 @@
 En un bash navegar hasta el path correspondiente al proyecto y luego ejecutar los siguientes comandos\
 **./gradlew build** \
 **./gradlew run**\
-**Nota: posiblemente tenga que cambiar la contraseña de mysql del archivo application.yml que se encuentra en:** `src/main/resources/`
+**Nota: posiblemente tenga que cambiar el usuario y la contraseña de mysql del archivo application.yml que se encuentra en:** `src/main/resources/`
 
 ## EndPoints disponibles
 
