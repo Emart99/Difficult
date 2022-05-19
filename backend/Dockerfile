@@ -1,5 +1,6 @@
-FROM openjdk:14-jdk-alpine
+FROM openjdk:14-oraclelinux7
 COPY . /backend
 WORKDIR /backend
-RUN ./gradlew build
+run yum -y install dos2unix
+RUN dos2unix ./gradlew
 CMD ./gradlew run
