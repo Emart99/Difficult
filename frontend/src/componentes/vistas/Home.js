@@ -1,7 +1,7 @@
 import { SearchBar } from "../SearchBar";
 import "../../App.css";
 import { Filter } from "./../Filter";
-import { CardContainer } from "./../CardContainer";
+import { CardContainerContent } from "./../CardContainer";
 import { useEffect, useState } from "react";
 import { obtenerProductoFilter } from "../../services/productoService";
 import { FilterMobile } from "./../FilterMobile";
@@ -21,22 +21,7 @@ export function Home() {
     productosMasVisitados().then((data)=>setProductosMasVistos(data))
   }, [textoABuscar, puntaje, pais]);
 
-  const productosHandler = () => {
-    if (productos.length <= 0) {
-      return (
-        <>
-          <img
-            className="not-productos"
-            alt=""
-            role="presentation"
-            src="https://assets.market-storefront.envato-static.com/storefront/packs/media/images/search/not_found-c30e2e7521854866230a7626a306b9e5.png"
-          />
-          <div className="table">No se encontraron resultados</div>
-        </>
-      );
-    }
-    return CardContainer(productos);
-  };
+
   const carouselHandler = () => {
     if(productosMasVistos.length <= 0){
       return <br/>
@@ -45,21 +30,13 @@ export function Home() {
 
   }
 
-  const handlerProductosEncontrados = () => {
-    if (productos.length > 0) {
-      return (
-        <h6 className="px-3 col-lg-2 text-center col-12 letra-dinamica text-nowrap">Productos encontrados: {productos.length}</h6>
-      )
-    }
-  }
+
 
   return (
     <div className="main content">
-      {SearchBar(textoABuscar, setTextoABuscar)}
       {FilterMobile(setPuntaje, setPais)}
       {carouselHandler()}
-      {handlerProductosEncontrados()}
-      <div className="container-fluid">
+      <div className="container-fluid mt-2">
 
         <div className="row">
 
@@ -68,7 +45,7 @@ export function Home() {
             {Filter(setPuntaje, setPais)}
           </div>
           <div className="col-12 col-md-12 col-lg-10" key="cardcontainer">
-            {productosHandler()}
+            {CardContainerContent(productos,textoABuscar, setTextoABuscar)}
           </div>
         </div>
       </div>

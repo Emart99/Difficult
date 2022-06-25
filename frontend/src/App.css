@@ -126,22 +126,27 @@ thead {
 }
 
 .searchBar {
-  padding: 10px;
   width: 100%;
-  background-color: var(--colorHeader);
-  box-shadow: 0 4px 2px -2px var(--shadowSearchBar);
+  /* box-shadow: 0 4px 2px -2px var(--shadowSearchBar); */
 }
 
 .input-searchbar {
-  border-top-left-radius: 0.25rem;
-  border-bottom-left-radius: 0.25rem;
+  background-color: #EAE3E3;
+  border-top-right-radius: 5rem;
+  border-bottom-right-radius: 5rem;
+}
+.contador-productos{
+  margin-top:3.5vh;
 }
 
+.input-group-text{
+  background-color: white ;
+}
 .iconSearchBar {
-  color: white;
-  background-color: var(--colorHeader);
-  border-top-right-radius: 0.25rem;
-  border-bottom-right-radius: 0.25rem;
+  background-color: #EAE3E3;
+  
+  border-top-left-radius: 5rem;
+  border-bottom-left-radius: 5rem;
 }
 .filter-button:hover{
   background-color: var(--color-searchBar);

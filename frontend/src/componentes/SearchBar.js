@@ -5,7 +5,11 @@ export function SearchBar(textoABuscar, setTextoABuscar) {
   return (
     <div className="searchBar">
     <InputGroup >
+    <InputGroup.Text className="iconSearchBar">
+        <BsSearch />
+    </InputGroup.Text>
       <FormControl
+        style={{borderLeft:'0'}}
         className="input-searchbar"
         value={textoABuscar}
         onChange={(e) => setTextoABuscar(e.target.value)}
@@ -13,9 +17,7 @@ export function SearchBar(textoABuscar, setTextoABuscar) {
         placeholder="Buscar"
         data-testid="searchBar"
       />
-      <InputGroup.Text className="iconSearchBar">
-        <BsSearch />
-      </InputGroup.Text>
+     
     </InputGroup>
     </div>
   );
