@@ -1,11 +1,12 @@
-# DifficultApp Docker (grupo-5)
+# DifficultApp Docker
 
 ## Contiene 4 contenedores:
 - #### Kotlin (Spring Boot & Gradle)
 - #### React
 - #### MySql (Para usuarios y facturas)
 - #### MongoDB (Para productos y lotes)
-- #### Adminer (herramienta para administrar MYSQL)
+- #### Neo4j (Para sugerencias)
+- #### Redis (Para el carrito)
 
 ### Para ejecutarlo, desde el directorio del proyecto (donde se encuentra el docker-compose.yml) ejecutar:
 #### `docker-compose up --build`
@@ -13,4 +14,5 @@
 #### `sh init.sh`
 
 **Nota:**
-**Tanto el backend como el frontend pueden ejecutarse fuera de docker siguiendo las intrucciones que hay en sus respectivos 'readme'**
+**Muy recomendable correrlo directo con docker debido a la gran cantidad de dependencias necesarias para correr el backend (4 base de datos)**
+
