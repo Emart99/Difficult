@@ -27,7 +27,7 @@ En un bash navegar hasta el path correspondiente al proyecto y luego ejecutar lo
 
 `PUT /usuario/ingresar`\
 *Recibe usuario y contraseña por body y devuelve el id del usuario si si matchea de lo contrario, un error*\
-**requestBody**:\
+**requestBody**:
 >{\
 &ensp; "usuarioNombre": "Zeferino"\
 &ensp; "contrasenia": "asd123"\
@@ -38,7 +38,7 @@ En un bash navegar hasta el path correspondiente al proyecto y luego ejecutar lo
 
 `PUT /usuario/perfil/{uid}/editar`\
 *Recibe un usuario nuevo , el id de un usuario existente y pisa al usuario existente con los datos del nuevo usuario*\
-**requestBody**:\
+**requestBody**:
 >{\
 &ensp;"apellido": "Chávez"\
 &ensp;"nombre": "Zeferinas"\
@@ -65,7 +65,7 @@ En un bash navegar hasta el path correspondiente al proyecto y luego ejecutar lo
 ### Para el carrito
 `POST /carrito/{uid}/agregar`\
 *Recibe un id del usuario por path y un producto (con lote y cantidad) por body*
-**requestBody**:\
+**requestBody**:
 >{\
 &ensp;"cantidad": 1,\
 &ensp;"loteId": 1,\
@@ -89,7 +89,7 @@ En un bash navegar hasta el path correspondiente al proyecto y luego ejecutar lo
 *Trae el producto mas clickeado por un usuario especifico recibe su id por path*
 `POST /logs`\
 *crea logs de clickeado*\
-**requestBody**:\
+**requestBody**:
 >{\
 &ensp;"idProducto": "62b752d67eb74678a83229a5",\
 &ensp;"idUsuario": "5",\
@@ -104,7 +104,7 @@ En un bash navegar hasta el path correspondiente al proyecto y luego ejecutar lo
 ### Para las recomendaciones
 `GET/producto/{pid}/usuario/{uid}"`\
 *trae las recomendaciones de productos(Quienes vieron este producto también compraron)*\
-*para un usuario al entrar a un producto pide id de producto y id de usuario por path*\
+*para un usuario al entrar a un producto pide id de producto y id de usuario por path*
 
 ## DER
 ![](https://i.imgur.com/AZF5yKi.png)
