@@ -1,4 +1,4 @@
-# DifficultApp Backend (grupo-5)
+# DifficultApp Backend
 
 
 ### Como ejecutarlo sin IDE
