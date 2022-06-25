@@ -26,8 +26,8 @@ En un bash navegar hasta el path correspondiente al proyecto y luego ejecutar lo
 >}
 
 `PUT /usuario/ingresar`\
-*Recibe usuario y contraseña por body y devuelve el id del usuario si si matchea de lo contrario, un error*
-**requestBody**:
+*Recibe usuario y contraseña por body y devuelve el id del usuario si si matchea de lo contrario, un error*\
+**requestBody**:\
 >{\
 &ensp; "usuarioNombre": "Zeferino"\
 &ensp; "contrasenia": "asd123"\
@@ -37,8 +37,8 @@ En un bash navegar hasta el path correspondiente al proyecto y luego ejecutar lo
 *Recibe el id del usuario por path y devuelve un usuario*\
 
 `PUT /usuario/perfil/{uid}/editar`\
-*Recibe un usuario nuevo , el id de un usuario existente y pisa al usuario existente con los datos del nuevo usuario*
-**requestBody**:
+*Recibe un usuario nuevo , el id de un usuario existente y pisa al usuario existente con los datos del nuevo usuario*\
+**requestBody**:\
 >{\
 &ensp;"apellido": "Chávez"\
 &ensp;"nombre": "Zeferinas"\
@@ -65,11 +65,11 @@ En un bash navegar hasta el path correspondiente al proyecto y luego ejecutar lo
 ### Para el carrito
 `POST /carrito/{uid}/agregar`\
 *Recibe un id del usuario por path y un producto (con lote y cantidad) por body*
-**requestBody**:
+**requestBody**:\
 >{\
-&ensp;"cantidad": 1,
-&ensp;"loteId": 1,
-&ensp;"productoId": "62b752d67eb74678a83229a5"
+&ensp;"cantidad": 1,\
+&ensp;"loteId": 1,\
+&ensp;"productoId": "62b752d67eb74678a83229a5"\
 >}
 
 `DELETE /carrito/{uid}/quitar/{itemId}`\
@@ -89,13 +89,13 @@ En un bash navegar hasta el path correspondiente al proyecto y luego ejecutar lo
 *Trae el producto mas clickeado por un usuario especifico recibe su id por path*
 `POST /logs`\
 >{\
-&ensp;"idProducto": "62b752d67eb74678a83229a5",
-&ensp;"idUsuario": "5",
-&ensp;"productoDescripcion": "Cerámica de interior",
-&ensp;"productoImagen": "i0QUlrl",
-&ensp;"productoNombre": "Cañuelas",
-&ensp;"productoValoracion": 0
->}
+&ensp;"idProducto": "62b752d67eb74678a83229a5",\
+&ensp;"idUsuario": "5",\
+&ensp;"productoDescripcion": "Cerámica de interior",\
+&ensp;"productoImagen": "i0QUlrl",\
+&ensp;"productoNombre": "Cañuelas",\
+&ensp;"productoValoracion": 0\
+>}\
 *crea logs de clickeado*
 **requestBody**:
 
