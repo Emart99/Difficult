@@ -14,7 +14,7 @@ En un bash navegar hasta el path correspondiente al proyecto y luego ejecutar lo
 
 `POST /usuario/registrar`\
 *Envia por body un usuario a registrar*\
-**request**:
+**requestBody**:
 >{\
 &ensp;"apellido": "asd"\
 &ensp;"contrasenia": "asd123"\
@@ -27,7 +27,7 @@ En un bash navegar hasta el path correspondiente al proyecto y luego ejecutar lo
 
 `PUT /usuario/ingresar`\
 *Recibe usuario y contraseña por body y devuelve el id del usuario si si matchea de lo contrario, un error*
-**request**:
+**requestBody**:
 >{\
 &ensp; "usuarioNombre": "Zeferino"\
 &ensp; "contrasenia": "asd123"\
@@ -38,7 +38,7 @@ En un bash navegar hasta el path correspondiente al proyecto y luego ejecutar lo
 
 `PUT /usuario/perfil/{uid}/editar`\
 *Recibe un usuario nuevo , el id de un usuario existente y pisa al usuario existente con los datos del nuevo usuario*
-**request**:
+**requestBody**:
 >{\
 &ensp;"apellido": "Chávez"\
 &ensp;"nombre": "Zeferinas"\
@@ -65,6 +65,12 @@ En un bash navegar hasta el path correspondiente al proyecto y luego ejecutar lo
 ### Para el carrito
 `POST /carrito/{uid}/agregar`\
 *Recibe un id del usuario por path y un producto (con lote y cantidad) por body*
+**requestBody**:
+>{\
+&ensp;"cantidad": 1,
+&ensp;"loteId": 1,
+&ensp;"productoId": "62b752d67eb74678a83229a5"
+>}
 
 `DELETE /carrito/{uid}/quitar/{itemId}`\
 *Elimina el producto del carrito con el id del usuario y el id del producto por path*
@@ -77,6 +83,25 @@ En un bash navegar hasta el path correspondiente al proyecto y luego ejecutar lo
 
 `POST /carrito/{uid}/comprar`\
 *Ejecuta la compra del carrito del usuario recibe su id por path*
+
+## Para el clickLogger
+`GET /logs/{id}`\
+*Trae el producto mas clickeado por un usuario especifico recibe su id por path*
+`POST /logs`\
+>{\
+&ensp;"idProducto": "62b752d67eb74678a83229a5",
+&ensp;"idUsuario": "5",
+&ensp;"productoDescripcion": "Cerámica de interior",
+&ensp;"productoImagen": "i0QUlrl",
+&ensp;"productoNombre": "Cañuelas",
+&ensp;"productoValoracion": 0
+>}
+*crea logs de clickeado*
+**requestBody**:
+
+`GET /logs/productosMasClickeados`\
+*Trae el producto mas clickeado en general*
+## Para las recomendaciones
 
 ## DER
 ![](https://i.imgur.com/AZF5yKi.png)
