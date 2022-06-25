@@ -2,7 +2,7 @@
 
 
 ### Como ejecutarlo sin IDE
-*Antes de ejecutar los siguientes comandos se deberán tener encendidos servicios de 'mysql' y 'mongod' (para ajustar contraseñas se deberá ingresar al archivo aplication.yml)*
+*Antes de ejecutar los siguientes comandos se deberán tener encendidos servicios de 'mysql', 'mongod','redis','neo4j' (para ajustar contraseñas de las respectivas bases de datos se deberá ingresar al archivo aplication.yml)*
 \
 En un bash navegar hasta el path correspondiente al proyecto y luego ejecutar los siguientes comandos\
 **./gradlew build** \
