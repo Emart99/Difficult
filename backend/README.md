@@ -84,7 +84,7 @@ En un bash navegar hasta el path correspondiente al proyecto y luego ejecutar lo
 `POST /carrito/{uid}/comprar`\
 *Ejecuta la compra del carrito del usuario recibe su id por path*
 
-## Para el clickLogger
+### Para el clickLogger
 `GET /logs/{id}`\
 *Trae el producto mas clickeado por un usuario especifico recibe su id por path*
 `POST /logs`\
@@ -101,7 +101,10 @@ En un bash navegar hasta el path correspondiente al proyecto y luego ejecutar lo
 
 `GET /logs/productosMasClickeados`\
 *Trae el producto mas clickeado en general*
-## Para las recomendaciones
+### Para las recomendaciones
+`GET/producto/{pid}/usuario/{uid}"`\
+*trae las recomendaciones de productos(Quienes vieron este producto también compraron)*\
+*para un usuario al entrar a un producto pide id de producto y id de usuario por path*\
 
 ## DER
 ![](https://i.imgur.com/AZF5yKi.png)
