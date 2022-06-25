@@ -88,6 +88,8 @@ En un bash navegar hasta el path correspondiente al proyecto y luego ejecutar lo
 `GET /logs/{id}`\
 *Trae el producto mas clickeado por un usuario especifico recibe su id por path*
 `POST /logs`\
+*crea logs de clickeado*\
+**requestBody**:\
 >{\
 &ensp;"idProducto": "62b752d67eb74678a83229a5",\
 &ensp;"idUsuario": "5",\
@@ -95,9 +97,7 @@ En un bash navegar hasta el path correspondiente al proyecto y luego ejecutar lo
 &ensp;"productoImagen": "i0QUlrl",\
 &ensp;"productoNombre": "Cañuelas",\
 &ensp;"productoValoracion": 0\
->}\
-*crea logs de clickeado*
-**requestBody**:
+>}
 
 `GET /logs/productosMasClickeados`\
 *Trae el producto mas clickeado en general*
