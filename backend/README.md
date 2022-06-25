@@ -1,4 +1,4 @@
-# DifficultApp Backend
+# DifficultApp Backend (Rest Api)
 
 
 ### Como ejecutarlo sin IDE
