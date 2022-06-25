@@ -3,7 +3,8 @@ import { BsSearch } from "react-icons/bs";
 
 export function SearchBar(textoABuscar, setTextoABuscar) {
   return (
-    <InputGroup className="searchBar">
+    <div className="searchBar">
+    <InputGroup >
       <FormControl
         className="input-searchbar"
         value={textoABuscar}
@@ -16,5 +17,6 @@ export function SearchBar(textoABuscar, setTextoABuscar) {
         <BsSearch />
       </InputGroup.Text>
     </InputGroup>
+    </div>
   );
 }

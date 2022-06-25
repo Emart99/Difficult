@@ -1,4 +1,4 @@
-# DifficultApp Frontend
+# DifficultApp Frontend (grupo-5)
 
 ## Scripts disponibles
 

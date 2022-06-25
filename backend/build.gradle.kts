@@ -28,10 +28,13 @@ repositories {
     mavenCentral()
 }
 
-val springVersion = "2.6.6"
+val springVersion = "2.7.0"
 val jacksonVersion = "2.13.2"
 val javaConnectorVersion = "8.0.28"
+
 dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-data-redis:$springVersion")
+    implementation("org.springframework.boot:spring-boot-starter-data-neo4j:$springVersion")
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf:$springVersion")
     implementation("org.springframework.boot:spring-boot-starter-web-services:$springVersion")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
@@ -42,7 +45,7 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation
     implementation("org.springframework.boot:spring-boot-starter-validation:$springVersion")
-
+    implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
     /* configuracion para sql /
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa
     
@@ -54,7 +57,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa:$springVersion")
     // https://mvnrepository.com/artifact/mysql/mysql-connector-java
     runtimeOnly("mysql:mysql-connector-java:$javaConnectorVersion")
-
+    runtimeOnly("org.neo4j:neo4j-ogm-bolt-driver:3.2.23")
 }
 
 

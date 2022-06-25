@@ -15,6 +15,7 @@ import { Carrito } from "./componentes/vistas/Carrito";
 import { Registrar } from "./componentes/vistas/Registrar";
 import useLocalStorage from "use-local-storage";
 import { useEffect } from "react";
+import { NotFound } from './componentes/vistas/NotFound';
 
 const HeaderHandler = (setTheme, theme) => {
   return (
@@ -53,13 +54,16 @@ function App() {
       <Router>
         {HeaderHandler(switchTheme, theme)}
         <Switch>
+          <Route exact path="/">
+            <Redirect to="/home" />
+          </Route>
           <Route path="/home" component={Home} />
           <Route path="/detalleDeProducto/:id" component={DetallesProducto} />
           <Route path="/login" component={Login} />
           <Route path="/registrar" component={Registrar} />
           <Route path="/perfil" component={Perfil} />
           <Route path="/carrito" component={Carrito} />
-          <Redirect from="*" to="/home" />
+          <Route component={NotFound}/>
         </Switch>
         <Footer />
       </Router>

@@ -3,11 +3,18 @@ package aplicacion.dominio.usuario
 import aplicacion.excepciones.BusinessException
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
+import org.springframework.data.annotation.Id
+import org.springframework.data.neo4j.core.schema.Node
+import org.springframework.data.neo4j.core.schema.Relationship
 import javax.persistence.*
 
-@Entity
+import javax.persistence.Id as idJPA
+import javax.persistence.GeneratedValue as generatedValueJPA
+
+@Entity @Node("Usuario")
 class Usuario {
-    @Id @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Id
+    @idJPA @generatedValueJPA(strategy= GenerationType.IDENTITY)
     @JsonIgnore var id: Long? = null
     @JsonIgnore var usuarioNombre: String = ""
     @JsonIgnore var contrasenia: String = ""
@@ -20,9 +27,11 @@ class Usuario {
 
     @JsonProperty("comprasRealizadas")
     @OneToMany(cascade = [CascadeType.MERGE,CascadeType.PERSIST]) @JoinColumn(name="usuario_id")
+    @org.springframework.data.annotation.Transient
     var facturas: MutableList<Factura> = mutableListOf()
 
     fun comprar(factura: Factura) {
+        factura.user = this
         this.checkSaldo(factura)
         saldo = calcularSaldo(factura)
         facturas.add(factura)

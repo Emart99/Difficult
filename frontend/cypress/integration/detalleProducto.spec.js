@@ -1,16 +1,3 @@
-describe("Intentar agregar item sin loguearse", () => {
-  it("Intentar agregar item sin loguearse -> no hace nada (ni puede entrar al carrito)", () => {
-    cy.visit("/detalleDeProducto/9");
-    cy.get("[data-testid^=radio]").first().click();
-    cy.get("[data-testid=cantidadInput]").type("2");
-    cy.get("[data-testid=botonCarrito]").click();
-    cy.visit("/carrito");
-    cy.location().should((loc) => {
-      expect(loc.pathname).to.eq("/login");
-    });
-  });
-});
-
 describe("Casos del detalle de producto", () => {
   const eggerJSON = {
     id: 8,
@@ -80,13 +67,16 @@ describe("Casos del detalle de producto", () => {
   };
 
   beforeEach(() => {
-    cy.visit("/detalleDeProducto/8");
+    cy.visit("/");
+    cy.get("[data-testid=searchBar]").type("egger");
+    cy.get("[data-testid=home-card-container]").find("img").first().click({force: true});
     cy.get("div .alert a[href='/login']").click();
     cy.get("[data-testid=userInput]").type("Zeferina");
     cy.get("[data-testid=passwInput]").type("1234");
     cy.get("[data-testid=botonInput]").click();
     cy.wait(1000).then(() => {
-      cy.visit("/detalleDeProducto/8");
+      cy.get("[data-testid=searchBar]").type("egger");
+      cy.get("[data-testid=home-card-container]").find("img").first().click({force: true});
     });
   });
 
@@ -106,14 +96,11 @@ describe("Casos del detalle de producto", () => {
       .then((val) => {
         cy.get("[data-testid=cantidadInput]").clear().type(val);
       });
-    // cy.get("[data-testid=cantidadInput]")
-    //   .clear()
-    //   .type(eggerJSON.lotes[0].cantidadDeUnidades);
     cy.get("[data-testid=botonCarrito]").click();
 
     cy.visit("/carrito").then(() => {
-      cy.get("[data-testid=tablaCarrito]")
-        .find(`[data-testid=carrito-${eggerJSON.nombre}]`)
+      cy.get("div .carrito")
+        .find("h4")
         .should("have.text", eggerJSON.nombre);
     });
   });
@@ -132,9 +119,6 @@ describe("Casos del detalle de producto", () => {
           .clear()
           .type(val + 1);
       });
-    // .text()
-
-    // eggerJSON.lotes[0].cantidadDeUnidades + 2
     cy.get(".invalid-feedback")
       .should("be.visible")
       .and("have.text", "La cantidad no puede ser mayor al stock disponible.");

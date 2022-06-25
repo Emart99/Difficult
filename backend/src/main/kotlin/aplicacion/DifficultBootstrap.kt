@@ -6,8 +6,10 @@ import aplicacion.dominio.producto.simple.*
 import aplicacion.dominio.usuario.Factura
 import aplicacion.dominio.usuario.ItemFactura
 import aplicacion.dominio.usuario.Usuario
-import aplicacion.repositorios.RepoProductos
-import aplicacion.repositorios.RepoUsuarios
+import aplicacion.repositorios.mongo.RepoProductos
+import aplicacion.repositorios.mysql.RepoUsuarios
+import aplicacion.repositorios.neo4j.RepoFacturasGrafito
+import aplicacion.repositorios.neo4j.RepoUsuariosGrafito
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.InitializingBean
@@ -22,6 +24,7 @@ import kotlin.math.cos
 @Service
 open class DifficultBootstrap : InitializingBean {
     @Autowired private lateinit var repoUsuarios: RepoUsuarios
+    @Autowired private lateinit var repoFacturasGrafito: RepoFacturasGrafito
     @Autowired private lateinit var repoProductos: RepoProductos
 
     private var listaDeProductos: MutableList<ProductoSimple> = mutableListOf()
@@ -29,7 +32,7 @@ open class DifficultBootstrap : InitializingBean {
     private var listaDeLotes: MutableList<Lote> = mutableListOf()
 
     private val log: Logger = LoggerFactory.getLogger(DifficultBootstrap::class.java)
-    private val cantidadDeLotes: Int = 160
+    private var cantidadDeLotes: Int = 160
 
     private fun instanciarProductos() {
         listaDeProductos.add(Piso().apply {
@@ -60,7 +63,7 @@ open class DifficultBootstrap : InitializingBean {
 
         listaDeProductos.add(Piso().apply {
             imagen = "X078aKC"
-            nombre = "Cañuelas"
+            nombre = "Cañuelardo"
             descripcion = "Cerámicas de interior"
             medidasX = 50.0
             medidasY = 50.0
@@ -210,7 +213,7 @@ open class DifficultBootstrap : InitializingBean {
 
         listaDeProductos.add(Pintura().apply {
             imagen = "sqUUqQ7"
-            nombre = "Albalatex Ultralavable"
+            nombre = "Albalatex (choreo)"
             descripcion = "Látex interior Mate"
             puntaje = 4
             paisDeOrigen = "Argentina"
@@ -235,6 +238,17 @@ open class DifficultBootstrap : InitializingBean {
 
     private fun instanciarUsuarios() {
         listaDeUsuarios.add(Usuario().apply {
+            nombre = "Clemente"
+            apellido = "Lopez"
+            edad = 34
+            saldo = 1200000.00
+
+            usuarioNombre = "Clemente"
+            contrasenia = "1234"
+            imagen = "LziS4xI"
+        })
+
+        listaDeUsuarios.add(Usuario().apply {
             nombre = "Bonifacio"
             apellido = "Gomez"
             edad = 46
@@ -245,16 +259,6 @@ open class DifficultBootstrap : InitializingBean {
             imagen = "9N6dG0I"
         })
 
-        listaDeUsuarios.add(Usuario().apply {
-            nombre = "Clemente"
-            apellido = "Lopez"
-            edad = 34
-            saldo = 1200000.00
-
-            usuarioNombre = "Clemente"
-            contrasenia = "1234"
-            imagen = "LziS4xI"
-        })
 
         listaDeUsuarios.add(Usuario().apply {
             nombre = "Dalmacio"
@@ -328,8 +332,9 @@ open class DifficultBootstrap : InitializingBean {
 
         for (i in 1..cantidadDeLotes + 5) {
             listaDeLotes.add(Lote().apply {
+                id = i.toLong()
                 fechaIngreso = diaCero
-                cantidadDeUnidades = (250 * abs(cos(i.toDouble()))).toInt()
+                cantidadDeUnidades = (250 * abs(cos(i.toDouble()))).toInt() + 1
             })
 
             if (diaCero.isEqual(LocalDate.now())) {
@@ -372,26 +377,11 @@ open class DifficultBootstrap : InitializingBean {
             (0..3).forEach {
                 val productoSimple = productoTemp[it]
                 agregarProductoCombo(productoSimple, productoSimple.lotes.first(), it + 1)
-                agregarLote(listaDeLotes[cantidadDeLotes + it])
+                agregarLote(listaDeLotes[160 + it])
             }
         })
-        repoProductos.save(Combo().apply {
-            imagen = "B7yWM0f"
-            nombre = "combo"
-            descripcion = "pisos y pinturas"
-            puntaje = 1
-            paisDeOrigen = "Argentina"
 
-            (0..3).forEach {
-                val productoSimple = productoTemp[it]
-                agregarProductoCombo(productoSimple, productoSimple.lotes.first(), it + 1)
-                agregarLote(Lote().apply{
-                    fechaIngreso= LocalDate.now()
-                    cantidadDeUnidades=2
-                })
-            }
-        })
-//        for(i in 1..10000){
+//        for(i in 1..1000){
 //            repoProductos.save(Combo().apply {
 //                imagen = "B7yWM0f"
 //                nombre = "combo "+i.toString()
@@ -403,11 +393,13 @@ open class DifficultBootstrap : InitializingBean {
 //                    val productoSimple = productoTemp[it]
 //                    agregarProductoCombo(productoSimple, productoSimple.lotes.first(), it + 1)
 //                    agregarLote(Lote().apply{
+//                        id= (i + cantidadDeLotes + it).toLong()
 //                        fechaIngreso=LocalDate.now()
 //                        cantidadDeUnidades=2
 //                    })
 //                }
 //            })
+//          cantidadDeLotes+=4
 //        }
 
 
@@ -416,13 +408,18 @@ open class DifficultBootstrap : InitializingBean {
         (0..7).forEach {
             val item0 = ItemFactura(productoTemp[it], productoTemp[it].lotes.first(), 1)
             val item1 = ItemFactura(productoTemp[it + 1], productoTemp[it + 1].lotes.first(), 1)
-
             listaDeUsuarios[it].comprar(
-                Factura(listOf(item0, item1)).apply { fechaDeCompra = fechaCompra.minusDays(it.toLong()) }
+                Factura(listOf(item0, item1),listaDeUsuarios[it]).apply { fechaDeCompra = fechaCompra.minusDays(it.toLong()) }
             )
             listaDeUsuarios[it].saldo = listaDeReSetUsuarios[it]
         }
         repoUsuarios.saveAll(listaDeUsuarios)
+        val listaFacturas = mutableListOf<Factura>()
+        (0..7).forEach{
+            listaFacturas.addAll(listaDeUsuarios[it].facturas)
+        }
+        repoFacturasGrafito.saveAll(listaFacturas)
+
     }
 
     override fun afterPropertiesSet() {
@@ -430,5 +427,8 @@ open class DifficultBootstrap : InitializingBean {
         log.info("Running initialization")
         log.info("**********************************************************************************************")
         this.iniciarDatos()
+        log.info("**********************************************************************************************")
+        log.info("Finish initialization")
+        log.info("**********************************************************************************************")
     }
 }

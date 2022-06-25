@@ -9,7 +9,7 @@ import { estaLogeado } from "../../services/usuarioService";
 import { ToastContainer } from 'react-toastify';
 import { MostrarError } from "../utils/toast";
 import swal from "sweetalert";
-import { notTablaCarrito } from "../tablas/notTablaCarrito";
+import { cardContainerCarrito } from "../tablas/cardContainerCarrito";
 import { formatter } from "../utils/priceFormater";
 
 export function Carrito() {
@@ -29,14 +29,16 @@ export function Carrito() {
 
   const borrarHandler = (item) => {
     carrito.splice(carrito.indexOf(item), 1);
-    borrarDelCarrito(item.id);
-    setOnClickRefresh(!onClickRefresh);
+    borrarDelCarrito(item.id).then(() => {
+      setOnClickRefresh(!onClickRefresh);
+    })
   };
 
   const limpiarCarritoHandler = () => {
-    limpiarCarrito();
-    setCarrito([]);
-    setOnClickRefresh(!onClickRefresh);
+    limpiarCarrito().then(() => {
+      // setCarrito([]);
+      setOnClickRefresh(!onClickRefresh);
+    })
   };
 
   const compradorHandler = async (event) => {
@@ -58,9 +60,13 @@ export function Carrito() {
   function carritoVacio() {
     if (!carrito.length) {
       return (
-        <h4 className="text-center mt-2" style={{minHeight:'47vh'}} data-testid="carritoVacio">
-          Tu carrito está vacío
-        </h4>
+        <div className="carrito-vacio ">
+          <img src="https://yetox.com/static/version1651098717/frontend/MageBig/martfury_layout06/en_US/images/empty-cart.svg" alt="empty cart" />
+          <h5 className="text-center mt-5 letra-dinamica" data-testid="carritoVacio">
+            Tu carrito está vacío
+          </h5>
+        </div>
+
       );
     }
   }
@@ -70,12 +76,12 @@ export function Carrito() {
     <ToastContainer style={{width:'370px'}} limit="3"/>
       <Container id="mycard" className="carrito-container">
         
-          <h3 className="mb-4 letra-dinamica text-carrito" >
+          <h2 className="mb-5 letra-dinamica text-carrito" >
             Carrito de compras
-          </h3>
+          </h2>
 
           <div className="carrito-card-body">
-            {notTablaCarrito(carrito, borrarHandler)}
+            {cardContainerCarrito(carrito, borrarHandler)}
             {carritoVacio()}
 
           <div id="myButton" as="div" className="text-end mx-2">

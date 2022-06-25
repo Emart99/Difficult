@@ -2,12 +2,12 @@ import { BsFillTrashFill } from "react-icons/bs";
 import { Container, Row, Col } from "react-bootstrap";
 import { formatter } from "../utils/priceFormater";
 
-export function notTablaCarrito(carrito, borrarHandler) {
+export function cardContainerCarrito(carrito, borrarHandler) {
 
   return (
     <>
       {carrito.map((item) => (
-        <Container fluid className="carrito">
+        <Container key={item.id} fluid className="carrito">
           <Row xl={12} className="p-0">
             <Col sm={3} className="px-0 align-self-center">
               <img

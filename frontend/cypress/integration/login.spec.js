@@ -18,7 +18,10 @@ describe("Casos de login", () => {
     cy.wait(1000).then(() => {
       expect(localStorage.getItem("user_id")).to.eq(null);
     });
-    cy.get("[data-testid=toast]").then((toast) => {
+    // cy.get("[data-testid=toast]").then((toast) => {
+    //   expect(toast).to.have.text("Usuario inexistente");
+    // });
+    cy.get("div .Toastify__toast").then((toast) => {
       expect(toast).to.have.text("Usuario inexistente");
     });
   });

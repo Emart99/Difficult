@@ -21,7 +21,7 @@ export function FilterMobile(setPuntaje, setPais) {
   const handleClose = () => setShow(false);
 
   return (
-    <div id="myButton" className="filter-mobile">
+    <div className="filter-mobile">
       <Button
         className="filter-button"
         key={"filter"}

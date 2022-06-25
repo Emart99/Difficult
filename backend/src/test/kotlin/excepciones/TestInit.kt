@@ -3,8 +3,8 @@ package excepciones
 import aplicacion.DifficultApp
 import aplicacion.DifficultBootstrap
 import aplicacion.controladores.UsuarioController
-import aplicacion.repositorios.RepoProductos
-import aplicacion.repositorios.RepoUsuarios
+import aplicacion.repositorios.mongo.RepoProductos
+import aplicacion.repositorios.mysql.RepoUsuarios
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean

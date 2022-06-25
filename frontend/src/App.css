@@ -127,9 +127,9 @@ thead {
 
 .searchBar {
   padding: 10px;
-  background-color: var(--color-searchBar);
-  margin-bottom: 3%;
-  box-shadow: 0px 4px 8px var(--shadowSearchBar);
+  width: 100%;
+  background-color: var(--colorHeader);
+  box-shadow: 0 4px 2px -2px var(--shadowSearchBar);
 }
 
 .input-searchbar {
@@ -143,19 +143,26 @@ thead {
   border-top-right-radius: 0.25rem;
   border-bottom-right-radius: 0.25rem;
 }
-
+.filter-button:hover{
+  background-color: var(--color-searchBar);
+  border-color: var(--color-searchBar);
+}
+.btn-check:focus+.btn-primary, .btn-primary:focus{
+  background-color: var(--color-searchBar);
+  border-color: var(--color-searchBar);
+  box-shadow: none;
+}
 .filter-button {
   width: 100%;
   border-radius: 0;
   border: 0;
   border-color: grey;
+  background-color: var(--color-searchBar);
 }
 
 .carrito{
-  width: max(300px,100%);
   box-shadow: 0 5px 6px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
-  background-color: var(--color-searchBar);
-   border: 2px solid white; 
+  background-color: var(--color-searchBar); 
   color: var(--letra);
   border-radius: 5px;
   font-size: 1.1rem;
@@ -167,11 +174,17 @@ thead {
 .img-carrito{
   max-width: 275px;
   width: 16vw;
-  height: 16vh;
+  height: 17vh;
   min-width: 120px;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
   object-fit: cover;
+}
+.carrito-vacio{
+  max-width: 580px;
+  margin: 0 auto;
+  margin-bottom: 16vh;
+  width: 100%;
 }
 
 .card {
@@ -229,12 +242,19 @@ textarea {
 .foto {
   height: 100%;
 }
+.button-perfil{
+  display:flex;
+  justify-content:flex-end;
+}
+.button-popover{
+  display:flex;
+  justify-content:flex-start;
+}
 
 .navbar {
   padding: 0.5rem 2rem;
   background-color: var(--colorHeader);
   color: var(--color-white);
-  box-shadow: 0px 4px 8px var(--shadowSearchBar);
   min-width: 360px;
 }
 
@@ -297,7 +317,13 @@ textarea {
 .letra-dinamica{
   color: var(--letra);
 }
-
+.carousel-item-padding-40-px{
+  padding:10px;
+}
+.carousel-img{
+  width:100%;
+  height: 360px;
+}
 .table {
   color: var(--letra);
   text-align: center;
@@ -310,6 +336,7 @@ textarea {
 .hover-effect:hover {
   transform: scale(1.02);
 }
+
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -421,6 +448,13 @@ input[type="number"] {
   justify-content: flex-end;
   gap:10px;
 }
+.not-found-img{
+  max-width: 100%;
+ max-height: 100%;
+ object-fit: contain;
+
+}
+
 
 @media (max-width: 480px) {
   .hamburguesa {
@@ -434,6 +468,15 @@ input[type="number"] {
 
 }
 @media (max-width: 575px){
+  .button-popover{
+    display:flex;
+    justify-content:center;
+  }
+  .button-perfil{
+    display:flex;
+    justify-content:center;
+  }
+
   .carrito-button-container{
     flex-direction: column-reverse;
   }
@@ -497,9 +540,11 @@ input[type="number"] {
 
   .filter-mobile {
     display: block;
-    margin-bottom: 5%;
   }
+  .carousel-text{
+    text-shadow: 1px 1px 2px black;
 
+  }
   .filter {
     box-shadow: none;
     border: none;

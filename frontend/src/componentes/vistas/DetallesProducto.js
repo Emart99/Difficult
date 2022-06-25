@@ -1,7 +1,7 @@
-import { Estrellitas } from "./../estrellitas";
 import { Button, Alert, Form } from "react-bootstrap";
+import { Estrellitas } from "./../estrellitas";
 import { useEffect, useState } from "react";
-import { obtenerProductoById } from "../../services/productoService";
+import { obetenerRecomendaciones, obtenerProductoById } from "../../services/productoService";
 import { ProductofromJSON } from "../../dominio/Producto";
 import { useParams } from "react-router-dom";
 import { agregarAlCarrito } from "../../services/carritoService";
@@ -11,23 +11,38 @@ import { Detalles } from "../Detalles";
 import { MostrarAgregado } from "../utils/toast";
 import { ToastContainer } from "react-toastify";
 import { formatter } from "../utils/priceFormater";
+import { useHistory } from "react-router-dom";
+import { logClickProducto } from "../../services/clickLogService";
+import { CarouselDetalle } from "../CarouselDetalle";
 
 export function DetallesProducto() {
   const { id } = useParams();
   const [producto, setProducto] = useState(false);
   const [cantidad, setCantidad] = useState(1);
+  const [productosRecomendados, setProductosRecomendados] = useState([]);
   const [lote, setLote] = useState(undefined);
+  const history = useHistory();
 
   useEffect(() => {
     async function fetchProducto() {
+      console.log("id: "+id)
       const prod = await obtenerProductoById(id);
+      await logClickProducto(prod)
       setProducto(ProductofromJSON(prod));
+      const prods = await obetenerRecomendaciones(id);
+      setProductosRecomendados(prods);
     }
-    fetchProducto();
-  }, [id]);
+    fetchProducto().catch(()=>history.push('/notFound'))
+    
+   
+  }, [id,history]);
 
   function cantidadInvalida() {
     return lote && cantidad > lote.cantidadDeUnidades;
+  }
+
+  function cantidadPositiva(){
+    return cantidad > 0 
   }
 
   function notLoggedIn() {
@@ -39,7 +54,7 @@ export function DetallesProducto() {
   }
 
   function validar() {
-    return !cantidadInvalida() && !loteNoSeleccionado() && !notLoggedIn();
+    return !cantidadInvalida() && !loteNoSeleccionado() && !notLoggedIn() && cantidadPositiva();
   }
 
 const handleCarrito = async () => {
@@ -84,7 +99,7 @@ const handleCarrito = async () => {
                     id="myButton"
                     className="d-flex flex-wrap flex-column align-self-md-end mb-4  "
                   >
-                    <ToastContainer position="bottom-center" className="toast-producto "/>
+                    <ToastContainer  limit={3} position="bottom-center" className="toast-producto "/>
                     <div className="mb-2">
                       <h3>{producto && formatter.format(producto.precio*cantidad)}</h3>
                     </div>
@@ -128,6 +143,13 @@ const handleCarrito = async () => {
                     >
                       Debe seleccionar primero el lote.
                     </Alert>
+                    <Alert
+                      key="AlertaCantidad"
+                      variant="danger"
+                      show={!cantidadPositiva() && !loteNoSeleccionado()}
+                    >
+                      La cantidad debe ser mayor a 0.
+                    </Alert>
                   </div>
                 </div>
               </main>
@@ -136,6 +158,9 @@ const handleCarrito = async () => {
         </div>
         {Detalles(producto)}
       </div>
+      <div>
+      </div>
+      {CarouselDetalle(productosRecomendados)}
     </section>
   );
 }

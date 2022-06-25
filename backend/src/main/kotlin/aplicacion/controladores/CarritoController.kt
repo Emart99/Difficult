@@ -18,7 +18,7 @@ class CarritoController {
         @Validated @RequestBody itemCarrito: ItemCarritoDes,
         @PathVariable uid: Long
     ) {
-        carritoService.agregarItem(uid, mapper(itemCarrito, ItemCarrito::class))
+        carritoService.agregarItem(uid,itemCarrito)
     }
 
     @DeleteMapping("/carrito/{uid}/quitar/{itemId}")

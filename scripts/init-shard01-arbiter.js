@@ -1,0 +1,1 @@
+rs.addArb('shard01-arbitro:27017');

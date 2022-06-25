@@ -3,14 +3,19 @@ package aplicacion.dominio.producto.simple
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.annotation.JsonView
 import aplicacion.dominio.producto.View
+import org.springframework.data.annotation.TypeAlias
+import org.springframework.data.mongodb.core.mapping.Document
 import javax.persistence.Entity
+import javax.persistence.Id
 
-@Entity
+
+@Document("Producto")
+@TypeAlias("Piso")
 class Piso : ProductoSimple() {
     @JsonProperty("medidas_x") var medidasX: Double = 0.00
     @JsonProperty("medidas_y") var medidasY: Double = 0.00
-    @JsonView(View.ProductoIndividual::class) var transito: Transito = Transito.NORMAL
-    @JsonView(View.ProductoIndividual::class) var terminacion: Terminacion = Terminacion.BRILLANTE
+    var transito: Transito = Transito.NORMAL
+    var terminacion: Terminacion = Terminacion.BRILLANTE
 
     override fun recargo(): Double {
         return transito.recargo()

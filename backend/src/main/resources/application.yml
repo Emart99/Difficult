@@ -4,6 +4,14 @@ server:
 #    include-binding-errors: always
 
 spring:
+  redis:
+    host: localhost
+    port: 6379
+  neo4j:
+    uri: bolt://localhost:7687
+    authentication:
+      username: neo4j
+      password: secret
   jackson:
     deserialization:
       fail-on-unknown-properties: true
@@ -12,6 +20,11 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/difficult
+      repositories:
+        enabled: true
   jpa:
     open-in-view: false
     show-sql: true #false

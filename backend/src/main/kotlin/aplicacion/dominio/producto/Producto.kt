@@ -3,26 +3,27 @@ package aplicacion.dominio.producto
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.annotation.JsonView
-import javax.persistence.*
+import org.springframework.data.annotation.Id
+import org.springframework.data.annotation.Transient
+import org.springframework.data.mongodb.core.mapping.Document
+import org.springframework.data.neo4j.core.schema.Node
 
 @JsonView(View.ProductoLista::class)
-@Entity @Inheritance
+@Document("Producto")
 abstract class Producto {
-    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-    open var id: Long? = null
-    open var imagen: String = ""
-
-    open var nombre: String = ""
-    open var descripcion: String = ""
+    @Id
+    @JsonView(View.ProductoRecomendado::class) open lateinit var id: String
+    @JsonView(View.ProductoRecomendado::class) var imagen: String = ""
+    @JsonView(View.ProductoRecomendado::class) open var nombre: String = ""
+    @JsonView(View.ProductoRecomendado::class) open var descripcion: String = ""
     open var puntaje: Int = 0
     open var paisDeOrigen: String = ""
 
     @JsonIgnore
     open var precioBase: Double = 0.0
 
-
-    @JsonView(View.ProductoIndividual::class)
-    @OneToMany(cascade = [CascadeType.MERGE,CascadeType.PERSIST]) @JoinColumn(name="producto_id")
+    @JsonProperty
+    @JsonView(View.ProductoConLote::class)
     open var lotes: MutableSet<Lote> = mutableSetOf()
 
     fun agregarLote(lote: Lote) {
@@ -33,12 +34,12 @@ abstract class Producto {
         lotes.remove(lote)
     }
 
-    fun lotePorId(liteId: Long): Lote {
-        return lotes.first { it.id == liteId }
+    fun lotePorId(loteId: Long): Lote {
+        return lotes.first { it.id == loteId }
     }
 
     @JsonProperty
-    open fun precio(): Double {
+    @JsonView(View.ProductoRecomendado::class) open fun precio(): Double {
         return precioBase * descuento()
     }
 
@@ -56,3 +57,9 @@ abstract class Producto {
         return this::class.simpleName
     }
 }
+
+data class ProductoDTO(val idProducto:String,
+                       val productoImagen:String,
+                       val productoNombre:String,
+                       val productoDescripcion:String,
+                       )

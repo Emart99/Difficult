@@ -33,4 +33,12 @@ describe("Casos del perfil", () => {
     cy.get("[data-testid=input-nombre]").should("have.value", "Zefe");
     cy.get("[data-testid=input-apellido]").should("have.value", "Chavez");
   });
+
+  it("Botón/popover producto más visto", ()=>{    
+    cy.visit("/perfil").then(()=>{
+      cy.get("div .button-popover").find("button").click().then(()=>{
+        cy.get("div[id='popover-basic']").find("h5").should('be.visible')
+      })
+    })
+  })
 });

@@ -8,13 +8,16 @@ import aplicacion.dominio.producto.Lote
 import aplicacion.dominio.producto.Producto
 import aplicacion.dominio.producto.View
 import aplicacion.dominio.producto.simple.ProductoSimple
+import org.springframework.data.annotation.TypeAlias
+import org.springframework.data.mongodb.core.mapping.Document
 import javax.persistence.*
 
-@Entity
+//@Entity
+@Document("Producto")
+@TypeAlias("Combo")
 class Combo : Producto() {
-    @JsonView(View.ProductoIndividual::class)
-    @OneToMany(cascade = [CascadeType.MERGE,CascadeType.PERSIST], fetch = FetchType.EAGER) @JoinColumn(name = "combo_id")
-    @JsonIgnore var items: MutableSet<ItemCombo> = mutableSetOf()
+    @JsonView(View.ProductoItem::class)
+    open var items: MutableSet<ItemCombo> = mutableSetOf()
 
     fun agregarProductoCombo(item: ProductoSimple, lote: Lote, cantidad: Int) {
         items.add(ItemCombo(item, lote, cantidad))
@@ -38,10 +41,16 @@ class Combo : Producto() {
 }
 
 /* PRODUCTOSIMPLE - LOTE - COMBO */
-@JsonView(View.ProductoIndividual::class)
-@Entity @Table(name="combo_producto_lote")
-class ItemCombo():Item(){
 
+class ItemCombo(){
+    @JsonIgnore lateinit var id:String
+
+    @JsonView(View.Item::class)
+    lateinit var producto: Producto
+    @JsonView(View.Item::class)
+    lateinit var lote: Lote
+    @JsonView(View.Item::class)
+    var cantidad: Int = 0
     constructor(producto: ProductoSimple, lote: Lote, cantidad: Int) : this() {
         this.producto = producto
         this.lote = lote

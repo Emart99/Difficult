@@ -3,7 +3,7 @@ import { formatter } from "./utils/priceFormater";
 
 export function CardContainer(productos) {
   return (
-    <div className="container-fluid ">
+    <div className="container-fluid " data-testid="home-card-container">
       <div className="row g-3">
         {productos.map((producto) => (
           <div

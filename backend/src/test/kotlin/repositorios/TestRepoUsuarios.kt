@@ -2,7 +2,7 @@ package repositorios
 
 import aplicacion.DifficultApp
 import aplicacion.dominio.usuario.Usuario
-import aplicacion.repositorios.RepoUsuarios
+import aplicacion.repositorios.mysql.RepoUsuarios
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.springframework.beans.factory.annotation.Autowired

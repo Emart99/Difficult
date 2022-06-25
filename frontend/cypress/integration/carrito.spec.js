@@ -1,12 +1,21 @@
 describe("Casos del carrito", () => {
-  const comprarProducto = (id, cantidad) => {
-    cy.visit(`/detalleDeProducto/${id}`);
+
+  const comprarProducto = () => {
+    cy.visit("/");
+    cy.get("[data-testid=searchBar]").type("Satinol");
+    cy.get("[data-testid=home-card-container]").find("img").first().click();
     cy.get("[data-testid^=producto]")
       .find("[data-testid^=radio-]")
-      .last()
+      .first()
       .click();
-    cy.get("[data-testid=cantidadInput]").clear().type(cantidad);
-    cy.get("[data-testid=botonCarrito]").click();
+    cy.get("[data-testid^=producto]")
+      .find("[data-testid^=cant-]")
+      .first()
+      .invoke("text")
+      .then((val) => {
+        cy.get("[data-testid=cantidadInput]").clear().type(val);
+        cy.get("[data-testid=botonCarrito]").click();
+      });
   };
 
   beforeEach(() => {
@@ -15,47 +24,36 @@ describe("Casos del carrito", () => {
     cy.get("[data-testid=passwInput]").type("1234");
     cy.get("[data-testid=botonInput]").click();
     cy.wait(1000).then(() => {
-      comprarProducto(9, 40);
-      comprarProducto(2, 2);
+      comprarProducto();
     });
     cy.visit("/carrito");
   });
 
   it("Eliminar un elemento del carrito", () => {
-    cy.get("[data-testid='tablaCarrito']")
-      .find("tr")
-      .first()
-      .then(($carrito) => {
-        const nLote = $carrito.find(`[data-testid^=carrito-N]`).text();
-        cy.wrap($carrito)
-          .find(`[data-testid^=delete-]`)
-          .click()
-          .then(() => {
-            cy.get("[data-testid='tablaCarrito']")
-              .find(`[data-testid=carrito-${nLote}]`)
-              .should("not.exist");
-          });
-      });
+    cy.get("div .carrito").then(($carrito) => {
+      cy.wrap($carrito.find("h4"))
+        .should("have.text", "Satinol")
+        .then(() => {
+          $carrito.find(`[data-testid^=delete-]`).click();
+        });
+    });
+    cy.get("div .carrito").should("not.exist");
   });
 
   it("Vaciar el carrito", () => {
     cy.get("[data-testid=limpiarCarrito]").click();
-    cy.get("[data-testid=tablaCarrito]").then(($tbody) => {
-      // cy.wait(1000);
-      // expect($tbody).to.be.empty;
-      cy.wrap($tbody).should("have.value", "");
-    });
+    cy.get("div .carrito-vacio").should("exist");
   });
 
   it("Finalizar compra exitosamente", () => {
-    cy.wait(3000);
+    cy.wait(1000);
     let total;
     cy.get("[data-testid=totalCarrito]").then((tot) => {
       total = tot.text();
       cy.log(total);
       cy.get("[data-testid=comprarCarrito]").click();
       cy.visit("/perfil");
-      cy.wait(1000).then(() => {
+      cy.wait(3000).then(() => {
         cy.get("[data-testid=comprasUser]")
           .find("td[data-testid=importeTotal]")
           .then(($compra) => {

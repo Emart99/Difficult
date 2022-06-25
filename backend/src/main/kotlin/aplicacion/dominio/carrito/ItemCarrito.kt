@@ -1,19 +1,39 @@
 package aplicacion.dominio.carrito
 
 import aplicacion.Keys
+import aplicacion.deserealizadores.ItemCarritoDes
 import aplicacion.dominio.producto.Lote
 import aplicacion.dominio.producto.Producto
 import aplicacion.dominio.usuario.ItemFactura
+import aplicacion.dominio.usuario.Usuario
+import org.springframework.data.annotation.Id
+import org.springframework.data.redis.core.RedisHash
+import org.springframework.data.redis.core.index.Indexed
+import javax.persistence.GeneratedValue
 
+@RedisHash("ItemCarrito")
 class ItemCarrito {
+    @Id
     var id: Long = Keys.plusItemCarrito()
-    var productoId: Long = 0
+    var productoId: String = ""
     var loteId: Long = 0
     var cantidad: Int = 0
     var imagen: String = ""
     var precio: Double = 0.0
     var nombre: String = ""
     var descripcion: String = ""
+
+    constructor(){
+    }
+    constructor(item:ItemCarritoDes,producto:Producto){
+        this.loteId = item.loteId
+        this.productoId = item.productoId
+        this.cantidad = item.cantidad
+        this.nombre = producto.nombre
+        this.imagen = producto.imagen
+        this.descripcion = producto.descripcion
+        this.precio = producto.precio() * this.cantidad
+    }
 
     fun itemFactura(lista: List<Producto>): ItemFactura {
         val producto: Producto = lista.first { it.id == productoId }
@@ -24,25 +44,6 @@ class ItemCarrito {
 
     fun updateCantidad(item: ItemCarrito) {
         this.cantidad += item.cantidad
-    }
-
-    fun updateItem(lista: List<Producto>) {
-        val producto: Producto = lista.first { it.id == productoId }
-        imagen = producto.imagen
-        precio = cantidad * producto.precio()
-        nombre = producto.nombre
-        descripcion = producto.descripcion
-    }
-
-    override fun equals(other: Any?): Boolean {
-        return other is ItemCarrito && other.productoId == productoId && other.loteId == loteId
-    }
-
-
-    override fun hashCode(): Int {
-        var result = productoId.hashCode()
-        result = 31 * result + loteId.hashCode()
-        result = 31 * result + cantidad
-        return result
+        this.precio += item.precio
     }
 }

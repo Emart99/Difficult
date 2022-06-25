@@ -31,7 +31,7 @@ open class TestInit {
         }
 
         producto0 = Piso().apply {
-            id =2
+            id ="2"
             imagen = "001"
             nombre = "Cañuelas"
             descripcion = "Cerámica de interior"
@@ -57,7 +57,7 @@ open class TestInit {
         }
 
         producto1 = Pintura().apply {
-            id = 10
+            id = "10"
             imagen = "009"
             nombre = "Pro 720"
             descripcion = "Látex interior / exterior Mate"
@@ -82,7 +82,7 @@ open class TestInit {
         }
 
         producto2 = Piso().apply {
-            id =2
+            id ="2"
             imagen = "001"
             nombre = "Cañuelas"
             descripcion = "Cerámica de interior"

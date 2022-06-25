@@ -1,29 +1,37 @@
 version: "3.9"
 
 services:
-  kotlin-spring:
-    container_name: kotlinardo
-    build: backend
-    ports:
-      - 8080:8080
-    depends_on:
-      mysql: 
-        condition: service_healthy
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/difficultApp?createDatabaseIfNotExist=true
+  # kotlin-spring:
+  #   container_name: kotlinardo
+  #   build: backend
+  #   ports:
+  #     - 8080:8080
+  #   depends_on:
+  #     mysql: 
+  #       condition: 'service_healthy'
+  #     router: 
+  #       condition: 'service_healthy'
+  #     # neo4j:
+  #     #   condition: 'service_healthy'
+  #     # redis:
+  #     #   condition: 'service_healthy'
+  #   environment:
+  #     SPRING_DATASOURCE_URL: 'jdbc:mysql://mysql:3306/difficultApp?createDatabaseIfNotExist=true'
+  #     SPRING_DATA_MONGODB_URI: mongodb://router:27017/difficult
+  #     SPRING_NEO4J_URI: bolt://neo4j:7687
+  #     SPRING_REDIS_HOST: redis
 
-  react:
-    container_name: react
-    build: frontend
-    ports:
-      - 3000:3000
-    expose:
-      - 3000
-    environment:
-      - NODE_ENV=development
-    volumes:
-      - ./frontend:/app
+  # react:
+  #   container_name: react
+  #   build: frontend
+  #   ports:
+  #     - 3000:3000
+  #   expose:
+  #     - 3000
+  #   volumes:
+  #     - ./frontend:/app
  
+
   mysql:
     container_name: mysql
     image: mysql
@@ -38,5 +46,114 @@ services:
       retries: 10000
       interval: 5s
 
-
     
+## Mongo Cluster
+## Router
+  router:
+    image: mongo:5.0
+    ports:
+      - 27017:27017
+    volumes:
+      - ./scripts:/scripts
+    healthcheck:
+      test: ["CMD", "mongo" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10000
+      interval: 5s
+  
+  neo4j:
+    container_name: neo4j
+    hostname: neo4j
+    image: neo4j
+    restart: always
+    expose:
+      - 7474
+      - 7687
+    ports:
+      - '7474:7474'
+      - '7687:7687'
+    environment:
+      - NEO4J_AUTH=neo4j/secret
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider localhost:7474 || exit 1"]
+      timeout: 20s
+      retries: 10000
+      interval: 5s
+
+  redis:
+    container_name: redis
+    hostname: redis 
+    image: 'redis'
+    expose: 
+      - 6379
+    ports: 
+      - '6379:6379'
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider localhost:6379 || exit 1"]
+      timeout: 20s
+      retries: 10000
+      interval: 5s
+
+  redis-commander:
+    container_name: redis-commander
+    hostname: redis-commander
+    image: rediscommander/redis-commander:latest
+    restart: always
+    environment:
+    - REDIS_HOSTS=local:redis:6379
+    ports:
+    - "8081:8081"
+          
+# ## Config Servers
+#   config01:
+#     image: mongo:5.0
+#     command: mongod --port 27017 --configsvr --replSet configserver
+#     volumes:
+#       - ./scripts:/scripts
+#     depends_on:
+#       - shard01-a
+#       - shard02-a
+#   config02:
+#     image: mongo:5.0
+#     command: mongod --port 27017 --configsvr --replSet configserver
+#     volumes:
+#       - ./scripts:/scripts
+#     depends_on:
+#       - config01
+
+#   ## Shards
+#   shard01-a:
+#     image: mongo:5.0
+#     command: mongod --port 27017 --shardsvr --replSet shard01
+#     volumes:
+#       - ./scripts:/scripts
+#     depends_on:
+#       - shard01-b
+#       - shard01-arbitro
+#   shard01-b:
+#     image: mongo:5.0
+#     command: mongod --port 27017 --shardsvr --replSet shard01
+#     volumes:
+#       - ./scripts:/scripts
+#   shard01-arbitro:
+#     image: mongo:5.0
+#     command: mongod --port 27017 --shardsvr --replSet shard01
+
+      
+#   shard02-a:
+#     image: mongo:5.0
+#     command: mongod --port 27017 --shardsvr --replSet shard02
+#     volumes:
+#       - ./scripts:/scripts
+#     depends_on:
+#       - shard02-b
+#       - shard02-arbitro
+#   shard02-b:
+#     image: mongo:5.0
+#     command: mongod --port 27017 --shardsvr --replSet shard02
+#     volumes:
+#       - ./scripts:/scripts
+#   shard02-arbitro:
+#     image: mongo:5.0
+#     command: mongod --port 27017 --shardsvr --replSet shard02
+  

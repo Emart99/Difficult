@@ -1,11 +1,12 @@
-# DifficultApp Backend 
+# DifficultApp Backend (grupo-5)
 
 
 ### Como ejecutarlo sin IDE
+*Antes de ejecutar los siguientes comandos se deberán tener encendidos servicios de 'mysql' y 'mongod' (para ajustar contraseñas se deberá ingresar al archivo aplication.yml)*
+\
 En un bash navegar hasta el path correspondiente al proyecto y luego ejecutar los siguientes comandos\
 **./gradlew build** \
-**./gradlew run**\
-**Nota: posiblemente tenga que cambiar el usuario y la contraseña de mysql del archivo application.yml que se encuentra en:** `src/main/resources/`
+**./gradlew run**
 
 ## EndPoints disponibles
 
