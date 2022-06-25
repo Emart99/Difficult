@@ -1,12 +1,13 @@
 # DifficultApp Docker
 
-## Contiene 4 contenedores:
+## Contiene 7 contenedores:
 - #### Kotlin (Spring Boot & Gradle (Backend))
 - #### React (Frontend)
 - #### MySql (Para usuarios y facturas)
 - #### MongoDB (Para productos y lotes)
 - #### Neo4j (Para sugerencias)
 - #### Redis (Para el carrito)
+- #### Redis-Commander (para visualizar datos de redis)
 
 ### Para ejecutarlo, desde el directorio del proyecto (donde se encuentra el docker-compose.yml) ejecutar:
 #### `docker-compose up --build`
