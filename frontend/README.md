@@ -16,3 +16,20 @@ Abre [http://localhost:3000](http://localhost:3000) para ver en el navegador.
 ### Para ejecutar los test de Cypress: 
 ### `npx cypress open`
 
+# Vistas
+## Login
+![Alt Text](https://i.imgur.com/bnTCgcf.gif)
+## Register
+![Alt Text](https://i.imgur.com/AwA7J0o.gif)
+## Detalle de producto
+![Alt Text](https://i.imgur.com/rKnCuIJ.gif)
+## Home 
+![Alt Text](https://i.imgur.com/udjkGdD.gif)
+## Home Mobile
+![Alt Text](https://i.imgur.com/Aqan4Vs.gif)
+## Perfil 
+![Alt Text](https://i.imgur.com/GAZj6Gs.gif)
+## Carrito
+![Alt Text](https://i.imgur.com/nXd2Vmi.gif)
+## Cambio de tema  dinamico
+![Alt Text](https://i.imgur.com/lnVZsWL.gif)
