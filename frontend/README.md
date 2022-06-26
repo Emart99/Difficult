@@ -24,7 +24,7 @@ Abre [http://localhost:3000](http://localhost:3000) para ver en el navegador.
 ## Detalle de producto
 ![Alt Text](https://i.imgur.com/rKnCuIJ.gif)
 ## Home 
-![Alt Text](https://i.imgur.com/MgIJsOs.gif)
+![Alt Text](https://i.imgur.com/KqCfbwy.gif)
 ## Home Mobile
 ![Alt Text](https://i.imgur.com/lvIMhDk.gif)
 ## Perfil 
