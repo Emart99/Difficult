@@ -26,7 +26,7 @@ Abre [http://localhost:3000](http://localhost:3000) para ver en el navegador.
 ## Home 
 ![Alt Text](https://i.imgur.com/udjkGdD.gif)
 ## Home Mobile
-![Alt Text](https://i.imgur.com/Aqan4Vs.gif)
+[Imgur](https://i.imgur.com/pMq2uDM.gifv)
 ## Perfil 
 ![Alt Text](https://i.imgur.com/GAZj6Gs.gif)
 ## Carrito
