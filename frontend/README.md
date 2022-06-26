@@ -32,4 +32,4 @@ Abre [http://localhost:3000](http://localhost:3000) para ver en el navegador.
 ## Carrito
 ![Alt Text](https://i.imgur.com/nXd2Vmi.gif)
 ## Cambio de tema  dinamico
-![Alt Text](https://i.imgur.com/lnVZsWL.gif)
+![Alt Text](https://i.imgur.com/WOPtyJ2.gif)
