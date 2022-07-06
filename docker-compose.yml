@@ -21,15 +21,15 @@ services:
   #     SPRING_NEO4J_URI: bolt://neo4j:7687
   #     SPRING_REDIS_HOST: redis
 
-  react:
-    container_name: react
-    build: frontend
-    ports:
-     - 3000:3000
-    expose:
-     - 3000
-    volumes:
-     - ./frontend:/app
+  # react:
+  #   container_name: react
+  #   build: frontend
+  #   ports:
+  #    - 3000:3000
+  #   expose:
+  #    - 3000
+  #   volumes:
+  #    - ./frontend:/app
  
 
   mysql:
