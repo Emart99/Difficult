@@ -1,4 +1,4 @@
-package com.main.Difficult.Domain;
+package com.main.Difficult.Domain.usuario;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.neo4j.core.schema.GeneratedValue;

@@ -1,4 +1,4 @@
-package com.main.Difficult.Domain;
+package com.main.Difficult.Domain.usuario;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
