@@ -13,18 +13,18 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Version;
-
+@Getter @Setter
 public class ItemCombo {
     @Id
-    @JsonIgnore public String id;
+    @JsonIgnore private String id;
     @JsonView(View.Item.class)
-    @Getter @Setter private Producto producto;
+    private Producto producto;
     @JsonView(View.Item.class)
-    @Getter @Setter private Integer cantidad = 0;
+    private Integer cantidad = 0;
     @JsonView(View.Item.class)
-    @Getter @Setter private Lote lote;
+    private Lote lote;
     public ItemCombo(ProductoSimple producto, Lote lote, Integer cantidad){
-        id = producto.id;
+        id = producto.getId();
         this.setProducto(producto);
         this.setLote(lote);
         this.setCantidad(cantidad);
@@ -39,5 +39,5 @@ public class ItemCombo {
     }
     @JsonProperty public String producto(){return producto.getNombre();}
     @JsonProperty("Precio") public String productoPrecio() {return "$ "+producto.getPrecioBase().toString();}
-    @JsonProperty public String lote(){return lote.id.toString();}
+    @JsonProperty public String lote(){return lote.getId().toString();}
 }

@@ -8,13 +8,13 @@ import lombok.Setter;
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
-
+@Getter @Setter
 @Node("Articulo")
 public class ItemFactura {
     @Id @GeneratedValue
-    @JsonIgnore public Long id =null;
-    @JsonIgnore @Getter @Setter private Producto producto;
-    @JsonIgnore @Getter @Setter private Lote lote;
+    @JsonIgnore private Long id =null;
+    @JsonIgnore private Producto producto;
+    @JsonIgnore private Lote lote;
     private Integer cantidad = 0;
     private Double precioCompra = 0.00;
 

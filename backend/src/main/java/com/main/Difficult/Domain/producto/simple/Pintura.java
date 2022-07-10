@@ -4,13 +4,13 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
-
+@Getter @Setter
 @Document("Producto")
 @TypeAlias("Pintura")
 public class Pintura extends ProductoSimple{
-    @Getter @Setter private Double volumen = 0.00;
-    @Getter @Setter private String color = "#008000";
-    @Getter @Setter private Double rendimiento = 0.0;
+    private Double volumen = 0.00;
+    private String color = "#008000";
+    private Double rendimiento = 0.0;
 
     public Pintura(String imagen, String nombre, String descripcion, Integer puntaje, String paisDeOrigen, Double precioBase,Double volumen, String color, Double rendimiento) {
         super(imagen, nombre, descripcion, puntaje, paisDeOrigen, precioBase);

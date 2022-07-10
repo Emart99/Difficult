@@ -13,24 +13,24 @@ import javax.persistence.Transient;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
+@Getter @Setter
 @Entity @Node("Factura")
 public class Factura {
     @org.springframework.data.neo4j.core.schema.Id @org.springframework.data.neo4j.core.schema.GeneratedValue
     @Id @GeneratedValue
-    public Long ordenDeComptra = null;
-    @Getter @Setter private Integer cantidadDeArticulos = 0;
-    @Getter @Setter private Double importeTotal = 0.00;
+    private Long ordenDeComptra = null;
+    private Integer cantidadDeArticulos = 0;
+    private Double importeTotal = 0.00;
     @Relationship(type = "COMPRA",direction = Relationship.Direction.INCOMING)
     @Transient @JsonIgnore
-    @Getter @Setter private Usuario user = new Usuario();
+    private Usuario user = new Usuario();
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    @Getter @Setter private LocalDateTime fechaDeCompra = LocalDateTime.now();
+    private LocalDateTime fechaDeCompra = LocalDateTime.now();
 
     @Relationship(type = "ITEMS")
     @JsonIgnore
     @Transient
-    @Getter @Setter private List<ItemFactura> items = new ArrayList<>();
+    private List<ItemFactura> items = new ArrayList<>();
     private Integer sumOfItemListCantidad(List<ItemFactura> _items){
         var sum = _items.stream().mapToInt(item -> item.getCantidad()).sum();
         return sum;

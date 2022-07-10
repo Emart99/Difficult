@@ -13,17 +13,18 @@ import java.util.Set;
 
 @JsonView(View.ProductoLista.class)
 @Document("Producto")
+@Getter @Setter
 public abstract class Producto {
     @Id
-    @JsonView(View.ProductoRecomendado.class) public String id;
-    @JsonView(View.ProductoRecomendado.class) @Getter @Setter private String imagen;
-    @JsonView(View.ProductoRecomendado.class) @Getter @Setter private String nombre;
-    @JsonView(View.ProductoRecomendado.class) @Getter @Setter  private String descripcion;
-    @Getter @Setter private Integer puntaje = 0;
-    @Getter @Setter private String paisDeOrigen = "";
-    @JsonIgnore  @Getter @Setter  private Double precioBase = 0.0;
+    @JsonView(View.ProductoRecomendado.class) private String id;
+    @JsonView(View.ProductoRecomendado.class) private String imagen;
+    @JsonView(View.ProductoRecomendado.class) private String nombre;
+    @JsonView(View.ProductoRecomendado.class) private String descripcion;
+    private Integer puntaje = 0;
+    private String paisDeOrigen = "";
+    @JsonIgnore  private Double precioBase = 0.0;
     @JsonProperty @JsonView(View.ProductoConLote.class)
-    @Getter @Setter private Set<Lote> lotes = new HashSet<>() ;
+    private Set<Lote> lotes = new HashSet<>() ;
 
     public Producto(String imagen, String nombre, String descripcion, Integer puntaje, String paisDeOrigen, Double precioBase){
         this.setImagen(imagen);
@@ -36,7 +37,7 @@ public abstract class Producto {
 
     public Lote lotePorId(Long loteId){
         return lotes.stream()
-                .filter(lote->lote.id.equals(loteId))
+                .filter(lote->lote.getId().equals(loteId))
                 .findAny()
                 .orElse(null);
     }

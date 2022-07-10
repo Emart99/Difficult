@@ -15,22 +15,23 @@ import org.springframework.data.redis.core.RedisHash;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Getter @Setter
 @RedisHash("ItemCarrito")
 public class ItemCarrito {
     // mi amigo el singleton
-    @Id public Long id = Keys.getInstance().getContador();
-    @Getter @Setter private String productoId;
-    @Getter @Setter private Long loteId;
-    @Getter @Setter private Integer cantidad;
-    @Getter @Setter private String imagen;
-    @Getter @Setter private Double precio;
-    @Getter @Setter private String nombre;
-    @Getter @Setter private String descripcion;
+    @Id private Long id = Keys.getInstance().getContador();
+    private String productoId;
+    private Long loteId;
+    private Integer cantidad;
+    private String imagen;
+    private Double precio;
+    private String nombre;
+    private String descripcion;
 
     public ItemCarrito(){}
     public ItemCarrito(ItemCarritoDes item, Producto producto){
         this.loteId = item.loteId;
-        this.productoId = producto.id;
+        this.productoId = producto.getId();
         this.cantidad = item.cantidad;
         this.nombre = producto.getNombre();
         this.imagen = producto.getImagen();
@@ -41,7 +42,7 @@ public class ItemCarrito {
     public ItemFactura itemFactura(List<Producto> lista){
         var producto = lista
                 .stream()
-                .filter(_producto->_producto.id.equals(this.productoId)).findFirst().orElseThrow();
+                .filter(_producto->_producto.getId().equals(this.productoId)).findFirst().orElseThrow();
         var lote = producto.lotePorId(this.loteId);
         return new ItemFactura(producto,lote,this.cantidad);
     }

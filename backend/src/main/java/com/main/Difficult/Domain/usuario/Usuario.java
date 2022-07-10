@@ -10,23 +10,23 @@ import org.springframework.data.neo4j.core.schema.Node;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
+@Getter @Setter
 @Entity @Node("Usuario")
 public class Usuario {
     @org.springframework.data.neo4j.core.schema.Id
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnore public Long id = null;
-    @Getter @Setter @JsonIgnore private String usuarioNombre = "";
-    @Getter @Setter @JsonIgnore private String contrasenia = "";
-    @Getter @Setter private String nombre = null;
-    @Getter @Setter private String apellido = null;
-    @Getter @Setter private Double saldo = null;
-    @Getter @Setter private String imagen = "";
-    @Getter @Setter private Integer edad = 0;
+    @JsonIgnore private Long id = null;
+    @JsonIgnore private String usuarioNombre = "";
+    @JsonIgnore private String contrasenia = "";
+    private String nombre = null;
+    private String apellido = null;
+    private Double saldo = null;
+    private String imagen = "";
+    private Integer edad = 0;
     @JsonProperty("comprasRealizadas")
     @OneToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST}) @JoinColumn(name="usuario_id")
     @org.springframework.data.annotation.Transient
-    @Getter @Setter private List<Factura> facturas = new ArrayList<>();
+    private List<Factura> facturas = new ArrayList<>();
     public Usuario(String _nombre,
                    String _apellido,
                    Integer _edad,

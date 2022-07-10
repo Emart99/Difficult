@@ -56,7 +56,7 @@ public class CarritoSerive {
         var carrito = repoCarrito.findById(uid).get();
         var itemABorrar = carrito.items
                 .stream()
-                .filter((item)->item.id == itemId)
+                .filter((item)->item.getId() == itemId)
                 .findFirst()
                 .get();
        carrito.items.remove(itemABorrar);

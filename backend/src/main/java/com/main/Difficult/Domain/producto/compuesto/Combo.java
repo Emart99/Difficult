@@ -26,7 +26,7 @@ public class Combo extends Producto {
         items.add(new ItemCombo(item,lote,cantidad));
     }
     public void borrarProductoCombo(ProductoSimple item){
-        items.removeIf((_item)-> _item.getProducto().id == item.id);
+        items.removeIf((_item)-> _item.getProducto().getId() == item.getId());
     }
     @Override
     public Boolean hayProductoConMasDe4Meses(){

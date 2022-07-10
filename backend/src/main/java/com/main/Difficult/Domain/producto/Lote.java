@@ -7,12 +7,12 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 
 import java.time.LocalDate;
-
+@Getter @Setter
 public class Lote {
     @Id
-    @JsonView(View.Lote.class) public Long id ;
-    @JsonView(View.Lote.class) @Getter @Setter private LocalDate fechaIngreso = LocalDate.now();
-    @JsonView(View.Lote.class) @Getter @Setter private Integer cantidadDeUnidades = 0;
+    @JsonView(View.Lote.class) private Long id ;
+    @JsonView(View.Lote.class) private LocalDate fechaIngreso = LocalDate.now();
+    @JsonView(View.Lote.class) private Integer cantidadDeUnidades = 0;
 
     public Lote(Long id, LocalDate fechaIngreso, Integer cantidadDeUnidades){
         this.id = id;
