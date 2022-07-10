@@ -12,6 +12,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RedisHash("ItemCarrito")
 public class ItemCarrito {
@@ -39,8 +40,7 @@ public class ItemCarrito {
     public ItemFactura itemFactura(List<Producto> lista){
         var producto = lista
                 .stream()
-                .filter((_producto)->_producto.id == this.productoId)
-                .findFirst().get();
+                .filter((Producto _producto)->_producto.id.equals( this.productoId)).findFirst().get();
         var lote = producto.lotePorId(this.loteId);
         return new ItemFactura(producto,lote,this.cantidad);
     }

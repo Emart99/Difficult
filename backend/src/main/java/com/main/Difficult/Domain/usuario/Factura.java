@@ -32,26 +32,22 @@ public class Factura {
     @Transient
     @Getter @Setter private List<ItemFactura> items = new ArrayList<>();
     private Integer sumOfItemListCantidad(List<ItemFactura> _items){
-        Integer sum = 0;
-        for (ItemFactura item : _items) {
-           sum += item.getCantidad();
-        }
+        var sum = _items.stream().mapToInt(item -> item.getCantidad()).sum();
         return sum;
     }
     private Double sumOfItemListPrecioCompra(List<ItemFactura> _items){
-        double precio = 0;
-        for (ItemFactura item : _items) {
-            precio += item.getPrecioCompra();
-        }
+        var precio =_items.stream().mapToDouble(item->item.getPrecioCompra()).sum();
         return precio;
+
     }
 
     public Factura(List<ItemFactura> _items, Usuario _user){
         this.setItems(_items);
         this.setUser(_user);
-        this.setCantidadDeArticulos(sumOfItemListCantidad(_items));
-        this.setImporteTotal(sumOfItemListPrecioCompra(_items));
+        cantidadDeArticulos = sumOfItemListCantidad(_items);
+        importeTotal = sumOfItemListPrecioCompra(_items);
     }
+    public Factura(){}
 }
 
 

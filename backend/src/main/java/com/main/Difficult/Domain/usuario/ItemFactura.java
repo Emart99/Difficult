@@ -28,6 +28,7 @@ public class ItemFactura {
         this.setCantidad(cantidad);
         this.setLote(lote);
         this.setProducto(producto);
-
+        lote.descontar(cantidad);
+        precioCompra = cantidad * producto.precio();
     }
 }

@@ -46,6 +46,9 @@ public class Usuario {
     public Usuario(){}
     public void comprar(Factura factura){
         factura.setUser(this);
+        this.checkSaldo(factura);
+        saldo = this.calcularSaldo(factura);
+        facturas.add(factura);
     }
     private Double calcularSaldo(Factura factura){
         if( this.saldo != null){

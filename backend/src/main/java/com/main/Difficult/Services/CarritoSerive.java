@@ -17,6 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 @Service
 public class CarritoSerive {
@@ -90,15 +91,15 @@ public class CarritoSerive {
     }
     private List<ItemFactura> crearItemsFacturas(List<ItemCarrito> itemCarritos){
         var productos = repoProducto.findAllById(this.itemToIds(itemCarritos));
-        var itemsFactura = (List<ItemFactura>) itemCarritos
+        var itemsFactura =  itemCarritos
                 .stream()
-                .map((item)-> item.itemFactura(productos));
+                .map(item-> item.itemFactura(productos)).collect(Collectors.toList());
         repoProducto.saveAll(productos);
-        return itemsFactura;
+        return  itemsFactura;
     }
 
     private List<String> itemToIds(List<ItemCarrito> items){
-        return (List<String>) items.stream().map((item)-> item.getProductoId());
+        return items.stream().map(ItemCarrito::getProductoId).collect(Collectors.toList());
     }
 
 }
