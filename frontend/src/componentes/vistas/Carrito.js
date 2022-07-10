@@ -28,7 +28,6 @@ export function Carrito() {
   }, [onClickRefresh, history]);
 
   const borrarHandler = (item) => {
-    console.log(item);
     carrito.splice(carrito.indexOf(item), 1);
     borrarDelCarrito(item.id).then(() => {
       setOnClickRefresh(!onClickRefresh);

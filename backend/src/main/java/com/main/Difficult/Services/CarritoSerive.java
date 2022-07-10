@@ -3,6 +3,7 @@ package com.main.Difficult.Services;
 import com.main.Difficult.Deserializers.ItemCarritoDes;
 import com.main.Difficult.Domain.carrito.Carrito;
 import com.main.Difficult.Domain.carrito.ItemCarrito;
+import com.main.Difficult.Domain.producto.Producto;
 import com.main.Difficult.Domain.usuario.Factura;
 import com.main.Difficult.Domain.usuario.ItemFactura;
 import com.main.Difficult.Repositories.mongo.ProductoRepository;
@@ -37,7 +38,7 @@ public class CarritoSerive {
         var producto = repoProducto.findById(itemCarrito.productoId).get();
         var itemAActualizar = carrito.items
                 .stream()
-                .filter((item)-> item.getLoteId() == itemCarrito.loteId && item.getProductoId() == itemCarrito.productoId)
+                .filter(item-> item.getLoteId().equals(itemCarrito.loteId) && item.getProductoId().equals(itemCarrito.productoId))
                 .findFirst();
         if(itemAActualizar.isPresent()){
             carrito.items.remove(itemAActualizar.get());
@@ -90,16 +91,20 @@ public class CarritoSerive {
         }
     }
     private List<ItemFactura> crearItemsFacturas(List<ItemCarrito> itemCarritos){
-        var productos = repoProducto.findAllById(this.itemToIds(itemCarritos));
+        System.out.println(this.itemToIds(itemCarritos));
+        var productos = repoProducto.findAllById(this.itemToIds(itemCarritos));;
+        System.out.println(productos);
         var itemsFactura =  itemCarritos
                 .stream()
-                .map(item-> item.itemFactura(productos)).collect(Collectors.toList());
+                .map(item->item.itemFactura((List<Producto>) productos)).collect(Collectors.toList());
+        System.out.println(itemsFactura);
         repoProducto.saveAll(productos);
         return  itemsFactura;
     }
 
     private List<String> itemToIds(List<ItemCarrito> items){
-        return items.stream().map(ItemCarrito::getProductoId).collect(Collectors.toList());
+        var ids = items.stream().map(item -> item.getProductoId()).collect(Collectors.toList());
+        return ids;
     }
 
 }

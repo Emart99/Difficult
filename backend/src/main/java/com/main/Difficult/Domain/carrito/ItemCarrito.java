@@ -4,6 +4,7 @@ import com.main.Difficult.Deserializers.ItemCarritoDes;
 import com.main.Difficult.DifficultApplication;
 import com.main.Difficult.Domain.producto.Producto;
 import com.main.Difficult.Domain.usuario.ItemFactura;
+import com.main.Difficult.Exceptions.NotFoundException;
 import com.main.Difficult.Utils.Keys;
 import io.lettuce.core.KeyScanCursor;
 import lombok.Getter;
@@ -40,7 +41,7 @@ public class ItemCarrito {
     public ItemFactura itemFactura(List<Producto> lista){
         var producto = lista
                 .stream()
-                .filter((Producto _producto)->_producto.id.equals( this.productoId)).findFirst().get();
+                .filter(_producto->_producto.id.equals(this.productoId)).findFirst().orElseThrow();
         var lote = producto.lotePorId(this.loteId);
         return new ItemFactura(producto,lote,this.cantidad);
     }

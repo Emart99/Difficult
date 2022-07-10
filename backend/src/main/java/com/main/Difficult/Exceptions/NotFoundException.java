@@ -1,6 +1,8 @@
 package com.main.Difficult.Exceptions;
 
-public class NotFoundException extends RuntimeException{
+import java.util.function.Supplier;
+
+public class NotFoundException extends RuntimeException {
     private String message;
     public NotFoundException(){
         super();
