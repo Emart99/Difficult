@@ -54,5 +54,8 @@ public abstract class Producto {
     public Boolean hayProductoConMasDe4Meses(){
         return lotes.stream().anyMatch(lote-> lote.tieneMasDe4Meses());
     }
+    @JsonProperty public String tipo(){
+        return this.getClass().getSimpleName();
+    }
 
 }

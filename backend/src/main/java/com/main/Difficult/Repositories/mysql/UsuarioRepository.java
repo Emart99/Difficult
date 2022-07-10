@@ -40,9 +40,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     List<Factura> findAllFacturasByUserId(@Param("uid") Long id);
 
     @Query(
-        "SELECT usuario from Usuario usuario "+
-        "join fetch usuario.facturas "+
-        "where usuario.id = :uid ")
-    Optional<Usuario> findUsuarioAndFacturaByUsuarioId(@Param("uid") Long id);
+        "SELECT usuario from Usuario usuario join fetch usuario.facturas where usuario.id = :uid")
+    Usuario findUsuarioAndFacturaByUsuarioId(@Param("uid") Long id);
 
 }

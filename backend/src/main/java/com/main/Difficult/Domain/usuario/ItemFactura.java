@@ -1,6 +1,10 @@
 package com.main.Difficult.Domain.usuario;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.main.Difficult.Domain.producto.Lote;
+import com.main.Difficult.Domain.producto.Producto;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
@@ -9,7 +13,8 @@ import org.springframework.data.neo4j.core.schema.Node;
 public class ItemFactura {
     @Id @GeneratedValue
     @JsonIgnore public Long id =null;
-    // producto y lote van aca
+    @JsonIgnore @Getter @Setter private Producto producto;
+    @JsonIgnore @Getter @Setter private Lote lote;
     private Integer cantidad = 0;
     private Double precioCompra = 0.00;
 
@@ -19,7 +24,10 @@ public class ItemFactura {
     public void setCantidad(Integer _cantidad){this.cantidad = _cantidad;}
     public void setPrecioCompra(Double _precioCompra){this.precioCompra = _precioCompra;}
 
-    public ItemFactura(Integer _cantidad){
-        this.setCantidad(_cantidad);
+    public ItemFactura(Producto producto, Lote lote, Integer cantidad){
+        this.setCantidad(cantidad);
+        this.setLote(lote);
+        this.setProducto(producto);
+
     }
 }

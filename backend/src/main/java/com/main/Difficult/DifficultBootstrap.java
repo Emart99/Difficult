@@ -288,9 +288,7 @@ public class DifficultBootstrap implements InitializingBean {
     private void instanciarLotes(){
         var diaCero = LocalDate.now().minusMonths(4L).minusDays(7L);
         for(int i = 0; i <cantidadDeLotes+5; i++){
-            System.out.println(i);
             this.lotes.add(new Lote(Long.valueOf(i),diaCero, (int) (250 * Math.abs(Math.cos(i))) + 1)) ;
-
         }
         if(diaCero.isEqual(LocalDate.now())){
             diaCero = LocalDate.now().minusMonths(4L);
