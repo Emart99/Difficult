@@ -16,7 +16,7 @@ import java.util.concurrent.atomic.AtomicReference;
 @TypeAlias("Combo")
 public class Combo extends Producto {
     @JsonView(View.ProductoItem.class)
-    private Set<ItemCombo> items  = new HashSet<>();
+    private Set<ItemCombo> items = new HashSet<>();
 
     public Combo(String imagen, String nombre, String descripcion, Integer puntaje, String paisDeOrigen, Double precioBase) {
         super(imagen, nombre, descripcion, puntaje, paisDeOrigen, precioBase);

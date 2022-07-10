@@ -1,12 +1,10 @@
 package com.main.Difficult;
 
+import com.main.Difficult.Domain.producto.compuesto.Combo;
+import com.main.Difficult.Domain.producto.simple.*;
 import com.main.Difficult.Domain.usuario.Usuario;
 import com.main.Difficult.Domain.producto.Lote;
 import com.main.Difficult.Domain.producto.Producto;
-import com.main.Difficult.Domain.producto.simple.Pintura;
-import com.main.Difficult.Domain.producto.simple.Piso;
-import com.main.Difficult.Domain.producto.simple.Terminacion;
-import com.main.Difficult.Domain.producto.simple.Transito;
 import com.main.Difficult.Repositories.mongo.ProductoRepository;
 import com.main.Difficult.Repositories.mysql.UsuarioRepository;
 import com.main.Difficult.Repositories.neo4j.FacturasRepository;
@@ -283,7 +281,6 @@ public class DifficultBootstrap implements InitializingBean {
                 13.0)
         );
 
-
     }
     private void instanciarLotes(){
         var diaCero = LocalDate.now().minusMonths(4L).minusDays(7L);
@@ -302,12 +299,28 @@ public class DifficultBootstrap implements InitializingBean {
         this.instanciarProductos();
         this.instanciarLotes();
 
+
         for (int i = 0 ; i<159; i++){
             productos.get(i % 16).agregarLote(lotes.get(i));
         }
+
+
         repoUsuario.saveAll(usuarios);
         repoUsuarioGrafos.saveAll(usuarios);
         repoProductos.saveAll(productos);
+        var combo =  new Combo("B7yWM0f",
+                "combo",
+                "pisos y pinturas",
+                1,
+                "Argentina",
+                0.0);
+
+        for(int i = 0 ; i < 3; i++){
+            combo.agregarProductoCombo((ProductoSimple) productos.get(i), productos.get(i).getLotes().stream().findFirst().get(),i+1);
+            combo.agregarLote(lotes.get(160+i));
+        }
+        productos.add(combo);
+        repoProductos.save(combo);
     }
     @Override
     public void afterPropertiesSet() throws Exception{

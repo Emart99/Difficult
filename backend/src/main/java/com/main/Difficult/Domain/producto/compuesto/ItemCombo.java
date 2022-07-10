@@ -7,10 +7,15 @@ import com.main.Difficult.Domain.producto.Lote;
 import com.main.Difficult.Domain.producto.Producto;
 import com.main.Difficult.Domain.producto.View;
 import com.main.Difficult.Domain.producto.simple.ProductoSimple;
+import com.main.Difficult.Utils.Keys;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Version;
 
 public class ItemCombo {
+    @Id
     @JsonIgnore public String id;
     @JsonView(View.Item.class)
     @Getter @Setter private Producto producto;
@@ -18,12 +23,13 @@ public class ItemCombo {
     @Getter @Setter private Integer cantidad = 0;
     @JsonView(View.Item.class)
     @Getter @Setter private Lote lote;
-    // cambiar producto por ProductoSimple
-    public ItemCombo(ProductoSimple _producto, Lote _lote, Integer _cantidad){
-        this.setProducto(_producto);
-        this.setLote(_lote);
-        this.setCantidad(_cantidad);
+    public ItemCombo(ProductoSimple producto, Lote lote, Integer cantidad){
+        id = producto.id;
+        this.setProducto(producto);
+        this.setLote(lote);
+        this.setCantidad(cantidad);
     }
+    public ItemCombo(){}
 
     public Double precioBase(){
         return producto.getPrecioBase();
